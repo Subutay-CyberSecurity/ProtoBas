@@ -12,17 +12,16 @@
 }
 
 .light-theme {
-  /* Light Theme - mavi tonlar */
-  --bg-color: #f0f8ff;           /* AliceBlue */
-  --main-bg-color: #dceeff;      /* Açık mavi panel */
-  --nav-text-color: #203040;
-  --span-text-color: #4682b4;
-  --description-text-color: #333333;
-  --heading-color: #203040;
-  --paragraph-color: #555555;
-  --protocol-border-color: #a0a0a0;
-  --protocol-text-color: #203040;
-  --protocol-hover-bg: #b0d4ff;
+  --bg-color: #121821;
+  --main-bg-color: #203040;
+  --nav-text-color: #a0c4ff;
+  --span-text-color: #90caf9;
+  --description-text-color: #e0e0e0;
+  --heading-color: #bbdefb;
+  --paragraph-color: #cfd8dc;
+  --protocol-border-color: #607d8b;
+  --protocol-text-color: #eceff1;
+  --protocol-hover-bg: #4682b4;
 }
 
 * {
