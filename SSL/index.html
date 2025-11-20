@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure Sockets Layer (SSL) - ProtoBas</title>
+  <link rel="stylesheet" href="../Style.css">
+</head>
+<body>
+  <main>
+    <nav>
+      <a href="../index.html"><h2>ProtoBas</h2></a>
+      <span id="star-count">⭐ Loading...</span>
+    </nav>
+    
+    <div class="protocol-detail">
+      <header class="protocol-header">
+        <h1 class="protocol-name">Secure Sockets Layer (SSL)</h1>
+        <div class="protocol-meta">
+          <div class="protocol-port"><strong>Port:</strong> <span class="port-number">N/A (Layer below application)</span></div>
+          <div class="protocol-type"><strong>Type:</strong> <span class="protocol-type-value">Transport Layer</span></div>
+        </div>
+      </header>
+      
+      <section class="protocol-description">
+        <h3>Description</h3>
+        <p>SSL (Secure Sockets Layer) is a cryptographic protocol designed to provide communications security over a computer network. Though largely superseded by TLS, SSL concepts remain important for understanding secure communications.</p>
+      </section>
+      
+      <section class="protocol-technical">
+        <h3>Technical Details</h3>
+        <ul>
+          <li>Provides encryption, authentication, and data integrity</li>
+          <li>Uses asymmetric cryptography for key exchange and symmetric encryption for data</li>
+          <li>SSL 1.0, 2.0, and 3.0 have known security vulnerabilities</li>
+          <li>Mostly replaced by TLS (Transport Layer Security) protocol</li>
+        </ul>
+      </section>
+      
+      <section class="protocol-security">
+        <h3>Security Considerations</h3>
+        <p>SSL versions 1.0, 2.0, and 3.0 have known security vulnerabilities and should not be used. Modern applications should use TLS 1.2 or higher for secure communications.</p>
+      </section>
+      
+      <section class="protocol-abuse">
+        <h3>Potential Abuse Cases</h3>
+        <p>SSL stripping attacks can downgrade secure connections. Older SSL implementations can be vulnerable to BEAST, POODLE, and other attacks if not properly configured.</p>
+      </section>
+      
+      <section class="protocol-detection">
+        <h3>Detection Strategies</h3>
+        <p>Monitor for SSL/TLS handshake failures, detect usage of deprecated SSL versions, and track certificate validation issues that may indicate security problems.</p>
+      </section>
+      
+      <section class="protocol-mitigation">
+        <h3>Mitigation Techniques</h3>
+        <p>Disable support for older SSL versions, enforce use of TLS 1.2 or higher, implement proper certificate validation, and regularly update cryptographic libraries.</p>
+      </section>
+      
+      <section class="protocol-references">
+        <h3>References</h3>
+        <ul>
+          <li><a href="https://tools.ietf.org/html/rfc6101">RFC 6101 - The Secure Sockets Layer (SSL) Protocol Version 3.0</a></li>
+          <li><a href="https://tools.ietf.org/html/rfc5246">RFC 5246 - The Transport Layer Security (TLS) Protocol Version 1.2</a></li>
+        </ul>
+      </section>
+    </div>
+  </main>
+  
+  <script src="../Main-page/Script.js"></script>
+  <script src="script.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function() { const savedTheme = localStorage.getItem("theme"); if (savedTheme) { document.documentElement.setAttribute("data-theme", savedTheme); } });</script>
+</body>
+</html>

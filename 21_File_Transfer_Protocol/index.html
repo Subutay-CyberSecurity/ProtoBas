@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Transfer Protocol (FTP) - ProtoBas</title>
+  <link rel="stylesheet" href="../Style.css">
+</head>
+<body class="light-theme">
+  <main>
+    <nav>
+      <a href="../index.html"><h2>ProtoBas</h2></a>
+      <span id="star-count">⭐ Loading...</span>
+    </nav>
+    
+    <div class="protocol-detail">
+      <header class="protocol-header">
+        <h1 class="protocol-name">File Transfer Protocol (FTP)</h1>
+        <div class="protocol-meta">
+          <div class="protocol-port"><strong>Port:</strong> <span class="port-number">21</span></div>
+          <div class="protocol-type"><strong>Type:</strong> <span class="protocol-type-value">Application Layer</span></div>
+        </div>
+      </header>
+      
+      <section class="protocol-description">
+        <h3>Description</h3>
+        <p>File Transfer Protocol (FTP) is a standard network protocol used for the transfer of computer files between a client and server on a computer network. FTP is built on a client-server model architecture and uses separate control and data connections between the client and the server.</p>
+      </section>
+      
+      <section class="protocol-technical">
+        <h3>Technical Details</h3>
+        <ul>
+          <li>Uses two separate channels: command channel (port 21) and data channel (various ports)</li>
+          <li>Supports both active and passive modes for data transfer</li>
+          <li>Plaintext protocol that transmits data and credentials in unencrypted form</li>
+          <li>Commonly used for uploading and downloading files to/from web servers</li>
+        </ul>
+      </section>
+      
+      <section class="protocol-security">
+        <h3>Security Considerations</h3>
+        <p>FTP transmits usernames, passwords, and data in plaintext, making it vulnerable to interception. It lacks encryption for both authentication and data transfer, which makes it inappropriate for use over unsecured networks.</p>
+      </section>
+      
+      <section class="protocol-abuse">
+        <h3>Potential Abuse Cases</h3>
+        <p>Attackers can use FTP to exfiltrate sensitive data from compromised systems. FTP servers with weak authentication can be exploited for unauthorized file access. Anonymous FTP servers can be used for storing and sharing malicious files.</p>
+      </section>
+      
+      <section class="protocol-detection">
+        <h3>Detection Strategies</h3>
+        <p>Monitor for FTP connections, especially those with anonymous login attempts. Look for large data transfers and connections from unusual IP addresses. Log authentication failures which might indicate brute force attempts.</p>
+      </section>
+      
+      <section class="protocol-mitigation">
+        <h3>Mitigation Techniques</h3>
+        <p>Use FTPS (FTP over SSL) or SFTP (SSH File Transfer Protocol) instead of plain FTP. Implement strong authentication mechanisms, limit FTP access to trusted IPs, and use chroot directories to restrict file access.</p>
+      </section>
+      
+      <section class="protocol-references">
+        <h3>References</h3>
+        <ul>
+          <li><a href="https://tools.ietf.org/html/rfc959">RFC 959 - File Transfer Protocol Specification</a></li>
+          <li><a href="https://tools.ietf.org/html/rfc2228">RFC 2228 - FTP Security Extensions</a></li>
+        </ul>
+      </section>
+    </div>
+  </main>
+  
+  <script src="../Main-page/Script.js"></script>
+  <script src="../script.js"></script>
+</body>
+</html>

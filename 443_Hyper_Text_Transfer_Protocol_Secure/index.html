@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hyper Text Transfer Protocol Secure (HTTPS) - ProtoBas</title>
+  <link rel="stylesheet" href="../Style.css">
+</head>
+<body>
+  <main>
+    <nav>
+      <a href="../index.html"><h2>ProtoBas</h2></a>
+      <span id="star-count">⭐ Loading...</span>
+    </nav>
+    
+    <div class="protocol-detail">
+      <header class="protocol-header">
+        <h1 class="protocol-name">Hyper Text Transfer Protocol Secure (HTTPS)</h1>
+        <div class="protocol-meta">
+          <div class="protocol-port"><strong>Port:</strong> <span class="port-number">443</span></div>
+          <div class="protocol-type"><strong>Type:</strong> <span class="protocol-type-value">Application Layer</span></div>
+        </div>
+      </header>
+      
+      <section class="protocol-description">
+        <h3>Description</h3>
+        <p>HTTPS (Hypertext Transfer Protocol Secure) is an extension of the HTTP protocol for secure communication over a computer network. It provides authentication of the website and associated web server, and protects the privacy and integrity of the exchanged data.</p>
+      </section>
+      
+      <section class="protocol-technical">
+        <h3>Technical Details</h3>
+        <ul>
+          <li>Uses TLS/SSL encryption to secure HTTP communications</li>
+          <li>Operates on port 443 by default</li>
+          <li>Establishes encrypted connection through TLS handshake</li>
+          <li>Supports various cipher suites for encryption</li>
+        </ul>
+      </section>
+      
+      <section class="protocol-security">
+        <h3>Security Considerations</h3>
+        <p>HTTPS provides encryption, data integrity, and authentication. However, it's only as secure as the underlying TLS implementation and certificate validation. Vulnerabilities in TLS or weak certificates can compromise security.</p>
+      </section>
+      
+      <section class="protocol-abuse">
+        <h3>Potential Abuse Cases</h3>
+        <p>HTTPS can be used to hide malicious communications from network monitoring tools. Certificate pinning bypass techniques and man-in-the-middle attacks with fake certificates are potential threats.</p>
+      </section>
+      
+      <section class="protocol-detection">
+        <h3>Detection Strategies</h3>
+        <p>Monitor certificate information, SNI (Server Name Indication) values, and TLS handshake patterns. Deep packet inspection can reveal malicious content despite encryption.</p>
+      </section>
+      
+      <section class="protocol-mitigation">
+        <h3>Mitigation Techniques</h3>
+        <p>Use strong cipher suites, properly validate certificates, implement HSTS (HTTP Strict Transport Security), and regularly update TLS implementations to patch vulnerabilities.</p>
+      </section>
+      
+      <section class="protocol-references">
+        <h3>References</h3>
+        <ul>
+          <li><a href="https://tools.ietf.org/html/rfc2818">RFC 2818 - HTTP Over TLS</a></li>
+          <li><a href="https://tools.ietf.org/html/rfc5246">RFC 5246 - The Transport Layer Security (TLS) Protocol Version 1.2</a></li>
+        </ul>
+      </section>
+    </div>
+  </main>
+  
+  <script src="../Main-page/Script.js"></script>
+  <script src="script.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function() { const savedTheme = localStorage.getItem("theme"); if (savedTheme) { document.documentElement.setAttribute("data-theme", savedTheme); } });</script>
+</body>
+</html>

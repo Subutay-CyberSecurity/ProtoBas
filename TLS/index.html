@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transport Layer Security (TLS) - ProtoBas</title>
+  <link rel="stylesheet" href="../Style.css">
+</head>
+<body>
+  <main>
+    <nav>
+      <a href="../index.html"><h2>ProtoBas</h2></a>
+      <span id="star-count">⭐ Loading...</span>
+    </nav>
+    
+    <div class="protocol-detail">
+      <header class="protocol-header">
+        <h1 class="protocol-name">Transport Layer Security (TLS)</h1>
+        <div class="protocol-meta">
+          <div class="protocol-port"><strong>Port:</strong> <span class="port-number">N/A (Layer below application)</span></div>
+          <div class="protocol-type"><strong>Type:</strong> <span class="protocol-type-value">Transport Layer</span></div>
+        </div>
+      </header>
+      
+      <section class="protocol-description">
+        <h3>Description</h3>
+        <p>TLS (Transport Layer Security) is a cryptographic protocol designed to provide communications security over a computer network. It is the successor to SSL and is used to secure communications over the internet.</p>
+      </section>
+      
+      <section class="protocol-technical">
+        <h3>Technical Details</h3>
+        <ul>
+          <li>Provides encryption, authentication, and integrity of data</li>
+          <li>Uses asymmetric cryptography for key exchange and symmetric encryption for data</li>
+          <li>Current versions include TLS 1.2, TLS 1.3 (with 1.3 being more secure)</li>
+          <li>Supports various cipher suites and key exchange algorithms</li>
+        </ul>
+      </section>
+      
+      <section class="protocol-security">
+        <h3>Security Considerations</h3>
+        <p>TLS 1.2 and 1.3 provide strong security when properly implemented. Proper certificate validation and use of secure cipher suites are essential for security.</p>
+      </section>
+      
+      <section class="protocol-abuse">
+        <h3>Potential Abuse Cases</h3>
+        <p>TLS can be used to hide malicious traffic from network monitoring tools. TLS tunneling can be used to bypass security controls and for command and control communications.</p>
+      </section>
+      
+      <section class="protocol-detection">
+        <h3>Detection Strategies</h3>
+        <p>Monitor certificate information, cipher suites being used, and SNI values. TLS inspection can be used to decrypt and analyze traffic, though this requires careful implementation.</p>
+      </section>
+      
+      <section class="protocol-mitigation">
+        <h3>Mitigation Techniques</h3>
+        <p>Enforce use of TLS 1.2 or higher, implement proper certificate validation, use secure cipher suites, and enable TLS inspection where appropriate.</p>
+      </section>
+      
+      <section class="protocol-references">
+        <h3>References</h3>
+        <ul>
+          <li><a href="https://tools.ietf.org/html/rfc5246">RFC 5246 - The Transport Layer Security (TLS) Protocol Version 1.2</a></li>
+          <li><a href="https://tools.ietf.org/html/rfc8446">RFC 8446 - The Transport Layer Security (TLS) Protocol Version 1.3</a></li>
+        </ul>
+      </section>
+    </div>
+  </main>
+  
+  <script src="../Main-page/Script.js"></script>
+  <script src="script.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function() { const savedTheme = localStorage.getItem("theme"); if (savedTheme) { document.documentElement.setAttribute("data-theme", savedTheme); } });</script>
+</body>
+</html>
