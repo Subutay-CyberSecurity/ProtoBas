@@ -3,72 +3,141 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hyper Text Transfer Protocol Secure (HTTPS) - ProtoBas</title>
+  <title>HTTPS - ProtoBas</title>
   <link rel="stylesheet" href="../Style.css">
 </head>
-<body>
+<body class="light-theme">
   <main>
     <nav>
       <a href="../index.html"><h2>ProtoBas</h2></a>
       <span id="star-count">⭐ Loading...</span>
     </nav>
     
-    <div class="protocol-detail">
-      <header class="protocol-header">
-        <h1 class="protocol-name">Hyper Text Transfer Protocol Secure (HTTPS)</h1>
-        <div class="protocol-meta">
-          <div class="protocol-port"><strong>Port:</strong> <span class="port-number">443</span></div>
-          <div class="protocol-type"><strong>Type:</strong> <span class="protocol-type-value">Application Layer</span></div>
+    <div class="protocol-detail-page">
+      <header class="protocol-page-header">
+        <h1 class="protocol-page-name">Hypertext Transfer Protocol Secure (HTTPS)</h1>
+        <div class="protocol-page-meta">
+          <div class="protocol-page-port"><strong>Port:</strong> <span class="port-page-number">443</span></div>
+          <div class="protocol-page-type"><strong>Type:</strong> <span class="protocol-page-type-value">Application Layer</span></div>
         </div>
       </header>
       
-      <section class="protocol-description">
+      <section class="protocol-page-description">
         <h3>Description</h3>
-        <p>HTTPS (Hypertext Transfer Protocol Secure) is an extension of the HTTP protocol for secure communication over a computer network. It provides authentication of the website and associated web server, and protects the privacy and integrity of the exchanged data.</p>
+        <p>
+          HTTPS is the secure version of HTTP and is the foundational protocol
+          that enables encrypted communication between web browsers and servers.
+          It ensures that transmitted data cannot be read or modified by
+          unauthorized parties. By combining HTTP with Transport Layer Security
+          (TLS), HTTPS provides confidentiality, integrity, and authentication
+          for modern web applications. It protects passwords, personal data,
+          payment information, cookies, and API communications, making it
+          essential for secure browsing and online services. HTTPS is now the
+          de facto standard for web traffic and is required by modern browsers
+          to access advanced features.
+        </p>
       </section>
       
-      <section class="protocol-technical">
+      <section class="protocol-page-technical">
         <h3>Technical Details</h3>
         <ul>
-          <li>Uses TLS/SSL encryption to secure HTTP communications</li>
-          <li>Operates on port 443 by default</li>
-          <li>Establishes encrypted connection through TLS handshake</li>
-          <li>Supports various cipher suites for encryption</li>
+          <li>Runs over TCP port 443</li>
+          <li>Uses TLS to encrypt application layer data</li>
+          <li>Supports TLS versions 1.0 through 1.3 depending on configuration</li>
+          <li>Ensures confidentiality, integrity, and authentication</li>
+          <li>Uses certificates issued by trusted Certificate Authorities</li>
+          <li>Employs symmetric encryption for data exchange and asymmetric encryption for handshake</li>
+          <li>Supports modern algorithms such as AES, ChaCha20, ECDHE, and RSA</li>
         </ul>
       </section>
-      
-      <section class="protocol-security">
+
+      <section class="protocol-page-how-to-work">
+        <h3>How To Work</h3>
+        <p>
+          When a user connects to a website using HTTPS, the browser sends an initial TCP connection request to port 443. Once the connection is established, the browser initiates a TLS handshake to verify the server's identity and negotiate encryption settings. This handshake is the foundation that allows secure communication to begin.
+        </p>
+        <p>
+          During the handshake, the server presents its digital certificate. This certificate contains the public key of the server and is signed by a trusted Certificate Authority. The browser validates the certificate to confirm that the domain being visited matches the certificate and that it has not expired or been revoked.
+        </p>
+        <p>
+          After validating the certificate, the browser and server agree on encryption algorithms and protocols. They negotiate a shared session key using asymmetric cryptographic methods such as ECDHE. This key is then used for fast symmetric encryption throughout the session.
+        </p>
+        <p>
+          Once the secure session is fully established, the browser sends the actual HTTP request inside an encrypted TLS tunnel. This means that URLs, cookies, form submissions, API calls, and headers are all protected from interception.
+        </p>
+        <p>
+          The server processes the request, generates a response, and sends it back through the same encrypted channel. Even if attackers intercept the traffic, they cannot view or modify the content without the session key.
+        </p>
+        <p>
+          Modern HTTPS implementations support features such as Perfect Forward Secrecy. This ensures that even if a server's private key is compromised in the future, past sessions cannot be decrypted because each session uses unique ephemeral keys.
+        </p>
+        <p>
+          Web browsers continuously evaluate HTTPS connections and will show visual indicators such as a lock icon to inform users that the connection is secure. If a certificate is invalid, browsers can block the page entirely to prevent unsafe access.
+        </p>
+        <p>
+          Content delivery networks often integrate tightly with HTTPS by providing edge based TLS termination. This reduces latency and ensures that encrypted traffic can scale efficiently across global networks.
+        </p>
+        <p>
+          APIs, mobile applications, and IoT systems rely heavily on HTTPS to ensure that sensitive information such as authentication tokens and device data remains secure during transmission.
+        </p>
+        <p>
+          As the web advances, HTTPS continues to evolve with new versions of TLS and improved cryptographic standards. This ensures long term protection against emerging threats and reinforces HTTPS as the trusted foundation of secure online communication.
+        </p>
+      </section>
+
+      <section class="protocol-page-security">
         <h3>Security Considerations</h3>
-        <p>HTTPS provides encryption, data integrity, and authentication. However, it's only as secure as the underlying TLS implementation and certificate validation. Vulnerabilities in TLS or weak certificates can compromise security.</p>
+        <p>
+          HTTPS provides strong protection against eavesdropping and tampering, but misconfiguration can expose systems to vulnerabilities. Weak cipher suites, outdated TLS versions, improperly issued certificates, and certificate pinning failures may all compromise security. Attackers can also attempt downgrade attacks to force insecure encryption. Maintaining secure HTTPS requires using modern TLS versions, enforcing strict certificate validation, and configuring servers to disable deprecated algorithms.
+        </p>
       </section>
       
-      <section class="protocol-abuse">
+      <section class="protocol-page-abuse">
         <h3>Potential Abuse Cases</h3>
-        <p>HTTPS can be used to hide malicious communications from network monitoring tools. Certificate pinning bypass techniques and man-in-the-middle attacks with fake certificates are potential threats.</p>
+        <p>
+          Threat actors may exploit HTTPS to hide malicious traffic within encrypted tunnels. Malware, command and control servers, and phishing sites often use HTTPS to appear legitimate. Encrypted traffic can bypass traditional inspection systems that cannot decrypt TLS. Attackers may also abuse certificate authorities or issue fraudulent certificates to impersonate trusted domains. Encrypted communication does not guarantee safety unless the certificate is verified carefully.
+        </p>
       </section>
       
-      <section class="protocol-detection">
+      <section class="protocol-page-detection">
         <h3>Detection Strategies</h3>
-        <p>Monitor certificate information, SNI (Server Name Indication) values, and TLS handshake patterns. Deep packet inspection can reveal malicious content despite encryption.</p>
+        <p>
+          Detecting malicious HTTPS traffic requires monitoring certificate anomalies, unusual domain patterns, unexpected TLS versions, or sudden spikes in encrypted sessions. Security tools may inspect metadata such as SNI, JA3 fingerprinting, and certificate validity without decrypting content. Organizations use TLS interception or controlled firewall policies to analyze encrypted threats while maintaining privacy and compliance requirements.
+        </p>
       </section>
       
-      <section class="protocol-mitigation">
+      <section class="protocol-page-mitigation">
         <h3>Mitigation Techniques</h3>
-        <p>Use strong cipher suites, properly validate certificates, implement HSTS (HTTP Strict Transport Security), and regularly update TLS implementations to patch vulnerabilities.</p>
+        <p>
+          Effective mitigation includes enforcing TLS 1.2 or higher, enabling Perfect Forward Secrecy, deploying HSTS for strict HTTPS enforcement, and regularly rotating certificates. Using certificate transparency logs and automated revocation checking helps detect fraudulent certificates. Web application firewalls, content filtering, and endpoint security solutions can further reduce risk from malicious encrypted traffic.
+        </p>
       </section>
       
-      <section class="protocol-references">
+      <section class="protocol-page-references">
         <h3>References</h3>
         <ul>
-          <li><a href="https://tools.ietf.org/html/rfc2818">RFC 2818 - HTTP Over TLS</a></li>
-          <li><a href="https://tools.ietf.org/html/rfc5246">RFC 5246 - The Transport Layer Security (TLS) Protocol Version 1.2</a></li>
+          <li><a href="#">RFC 2818</a></li>
+          <li><a href="#">TLS 1.3 RFC 8446</a></li>
+          <li><a href="#">CA/Browser Forum Guidelines</a></li>
         </ul>
       </section>
     </div>
   </main>
   
+  <footer>
+    <div class="footer-content">
+      <p>ProtoBas © 2025 - A curated collection of network protocols for cybersecurity professionals</p>
+      <p>Contact: <a href="mailto:SubutayUlgen@protonmail.com">SubutayUlgen@protonmail.com</a></p>
+      <p><a href="https://github.com/Subutay-cybersecurity/ProtoBas" target="_blank">GitHub Repository</a></p>
+    </div>
+  </footer>
+
   <script src="../Main-page/Script.js"></script>
-  <script src="script.js"></script>
-  <script>document.addEventListener("DOMContentLoaded", function() { const savedTheme = localStorage.getItem("theme"); if (savedTheme) { document.documentElement.setAttribute("data-theme", savedTheme); } });</script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const portElement = document.querySelector(".port-page-number")
+      portElement.style.color = "var(--accent-color)"
+    })
+  </script>
 </body>
 </html>

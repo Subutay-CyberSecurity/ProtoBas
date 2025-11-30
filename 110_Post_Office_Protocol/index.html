@@ -1,1 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POP3 - ProtoBas</title>
+  <link rel="stylesheet" href="../Style.css">
+</head>
+<body class="light-theme">
+  <main>
+    <nav>
+      <a href="../index.html"><h2>ProtoBas</h2></a>
+      <span id="star-count">⭐ Loading...</span>
+    </nav>
+    
+    <div class="protocol-detail-page">
+      <header class="protocol-page-header">
+        <h1 class="protocol-page-name">POP3 (Post Office Protocol Version 3)</h1>
+        <div class="protocol-page-meta">
+          <div class="protocol-page-port"><strong>Port:</strong> <span class="port-page-number">110</span></div>
+          <div class="protocol-page-type"><strong>Type:</strong> <span class="protocol-page-type-value">Email Retrieval</span></div>
+        </div>
+      </header>
+      
+      <section class="protocol-page-description">
+        <h3>Description</h3>
+        <p>
+          POP3 is an email retrieval protocol used by clients to download messages from a remote mail server. 
+          It is designed to allow users to access their email even when offline by retrieving messages and storing them locally. 
+          POP3 operates in a simple command response model and is considered lightweight compared to more complex protocols like IMAP. 
+          Although widely used POP3 has limitations regarding folder management and message synchronization which is why many modern systems prefer IMAP for advanced functionality.
+        </p>
+      </section>
+      
+      <section class="protocol-page-technical">
+        <h3>Technical Details</h3>
+        <ul>
+          <li>Uses TCP port 110 for unencrypted communication.</li>
+          <li>Supports a small set of commands such as USER PASS STAT LIST RETR DELE and QUIT.</li>
+          <li>Operates in three main states including authorization transaction and update.</li>
+          <li>Designed to download messages to local storage removing the need for constant server access.</li>
+          <li>POP3S also known as POP3 over TLS uses port 995 for secure connections.</li>
+        </ul>
+      </section>
 
+<section class="protocol-page-how-to-work">
+  <h3>How To Work</h3>
+
+  <p>
+    POP3 begins operating when an email client initiates a TCP connection to the mail server on port 110. 
+    Once the connection is established the server sends a greeting message indicating that it is ready to communicate. 
+    The client must authenticate before accessing any mail.
+  </p>
+
+  <p>
+    Authentication takes place in the authorization state. 
+    The client sends a username using the USER command followed by a password using the PASS command. 
+    If the credentials are valid the server grants access and switches to the transaction state.
+  </p>
+
+  <p>
+    Once authenticated the client can request mailbox statistics using the STAT command. 
+    This command returns the number of messages and their combined size. 
+    It helps the client decide how much data needs to be retrieved.
+  </p>
+
+  <p>
+    The LIST command allows the client to request a list of messages along with their sizes. 
+    This helps email clients display message indexes before downloading the actual content. 
+    Clients may choose to download all messages or only specific ones.
+  </p>
+
+  <p>
+    To retrieve a message the client uses the RETR command followed by the message number. 
+    The server responds with the full message including headers and body. 
+    POP3 does not support partial message fetch which means the entire message is transmitted.
+  </p>
+
+  <p>
+    After retrieving messages many clients issue the DELE command. 
+    This marks a message for deletion but does not remove it immediately. 
+    Deletion happens later during the update state when the client ends the session.
+  </p>
+
+  <p>
+    POP3 allows clients to maintain a simple local archive of messages. 
+    Once downloaded the messages are typically stored on the client machine. 
+    This makes POP3 suitable for offline use but limits multi device synchronization.
+  </p>
+
+  <p>
+    When the client finishes retrieving messages it issues the QUIT command. 
+    This transitions the connection into the update state. 
+    During this state the server removes all messages that were marked for deletion.
+  </p>
+
+  <p>
+    If the QUIT command is not issued such as during an unexpected disconnection the server does not delete any messages. 
+    This safety mechanism prevents accidental data loss and ensures that emails are preserved until explicitly removed.
+  </p>
+
+  <p>
+    Secure versions of POP3 use TLS to protect communication. 
+    POP3 over TLS allows credentials and messages to be encrypted preventing snooping and tampering. 
+    This is essential for protecting email privacy especially over untrusted networks.
+  </p>
+</section>
+      
+      <section class="protocol-page-security">
+        <h3>Security Considerations</h3>
+        <p>
+          POP3 transmits credentials and email data in clear text when used without TLS. 
+          This makes it vulnerable to interception attacks especially on public networks. 
+          Attackers may steal login credentials or read private messages. 
+          POP3 servers may also be targeted with brute force attempts and mailbox enumeration attacks. 
+          Using POP3S and strong authentication greatly improves security.
+        </p>
+      </section>
+      
+      <section class="protocol-page-abuse">
+        <h3>Potential Abuse Cases</h3>
+        <p>
+          Attackers may brute force POP3 accounts to steal personal information. 
+          POP3 traffic can be used to exfiltrate data by sending encoded information inside email bodies. 
+          Compromised accounts can be abused to distribute spam or phishing messages. 
+          Weak configurations may expose user credentials to interception through sniffing attacks.
+        </p>
+      </section>
+      
+      <section class="protocol-page-detection">
+        <h3>Detection Strategies</h3>
+        <p>
+          Monitoring authentication logs can reveal repeated failed logins or brute force attempts. 
+          Network inspection tools can detect unencrypted POP3 traffic leaking sensitive information. 
+          Alerting systems can flag unusual volumes of email downloads or suspicious deletion patterns. 
+          Intrusion detection platforms may detect known POP3 attack signatures or abnormal client behavior.
+        </p>
+      </section>
+      
+      <section class="protocol-page-mitigation">
+        <h3>Mitigation Techniques</h3>
+        <p>
+          Enforcing TLS for POP3 connections prevents credential theft. 
+          Implementing rate limiting reduces brute force attempts. 
+          Strong password policies help protect accounts from compromise. 
+          Disabling POP3 for accounts that do not require it minimizes attack exposure. 
+          Using multi factor authentication further protects email access.
+        </p>
+      </section>
+
+      <section class="protocol-page-references">
+        <h3>References</h3>
+        <ul>
+          <li><a href="https://www.rfc-editor.org/rfc/rfc1939" target="_blank">RFC 1939 Post Office Protocol Version 3</a></li>
+          <li><a href="https://www.rfc-editor.org/rfc/rfc2595" target="_blank">RFC 2595 TLS for POP3</a></li>
+        </ul>
+      </section>
+    </div>
+  </main>
+  
+  <footer>
+    <div class="footer-content">
+      <p>ProtoBas © 2025 - A curated collection of network protocols for cybersecurity professionals</p>
+      <p>Contact: <a href="mailto:SubutayUlgen@protonmail.com">SubutayUlgen@protonmail.com</a></p>
+      <p><a href="https://github.com/Subutay-cybersecurity/ProtoBas" target="_blank">GitHub Repository</a></p>
+    </div>
+  </footer>
+
+  <script src="../Main-page/Script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme) {
+        document.documentElement.setAttribute("data-theme", savedTheme);
+      }
+    });
+  </script>
+</body>
+</html>

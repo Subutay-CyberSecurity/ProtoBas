@@ -1,1 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SFTP - ProtoBas</title>
+  <link rel="stylesheet" href="../Style.css">
+</head>
+<body class="light-theme">
+  <main>
+    <nav>
+      <a href="../index.html"><h2>ProtoBas</h2></a>
+      <span id="star-count">⭐ Loading...</span>
+    </nav>
+    
+    <div class="protocol-detail-page">
+      <header class="protocol-page-header">
+        <h1 class="protocol-page-name">SFTP (Secure File Transfer Protocol)</h1>
+        <div class="protocol-page-meta">
+          <div class="protocol-page-port"><strong>Port:</strong> <span class="port-page-number">115</span></div>
+          <div class="protocol-page-type"><strong>Type:</strong> <span class="protocol-page-type-value">File Transfer</span></div>
+        </div>
+      </header>
+      
+      <section class="protocol-page-description">
+        <h3>Description</h3>
+        <p>
+          SFTP on port 115 is an older secure file transfer protocol that predates the modern SSH based SFTP. 
+          Although it shares the same name it is not related to SSH and does not operate through port 22. 
+          Port 115 SFTP was designed as a secure alternative to FTP by adding encryption and integrity protection but its implementation was limited and inconsistent. 
+          Because of this it is rarely used today and has been replaced by SSH based SFTP and FTPS. 
+          The protocol provides basic file transfer operations but lacks advanced functionality found in modern standards.
+        </p>
+      </section>
+      
+      <section class="protocol-page-technical">
+        <h3>Technical Details</h3>
+        <ul>
+          <li>Uses TCP port 115 for secure file transfer sessions.</li>
+          <li>Provides encrypted communication though early implementations varied in strength.</li>
+          <li>Supports basic operations like file upload download rename and deletion.</li>
+          <li>Not related to SSH based SFTP which operates on port 22.</li>
+          <li>Considered obsolete and replaced by modern secure file transfer protocols.</li>
+        </ul>
+      </section>
 
+<section class="protocol-page-how-to-work">
+  <h3>How To Work</h3>
+
+  <p>
+    Communication begins when the client establishes a TCP connection to the server on port 115. 
+    Once connected the server sends an initial response indicating support for the protocol and readiness to continue. 
+    The client then initiates authentication.
+  </p>
+
+  <p>
+    Authentication commonly uses a username and password exchange. 
+    The details of how credentials are protected depend on the specific implementation because the protocol was never standardized to the same degree as SSH based systems. 
+    After authentication the client is permitted to interact with the server filesystem.
+  </p>
+
+  <p>
+    The client can request directory listings file metadata and available file operations. 
+    These capabilities resemble traditional FTP but with encrypted communication between client and server. 
+    The encrypted channel prevents attackers from viewing transferred data or credentials.
+  </p>
+
+  <p>
+    File retrieval and upload are performed using simple request response transaction sequences. 
+    The client issues commands specifying file paths while the server confirms actions or returns error messages. 
+    All data including control instructions and transferred files flows through the secure channel.
+  </p>
+
+  <p>
+    File deletion and modification follow similar patterns. 
+    The client sends a command for the desired operation and the server validates permissions before executing the request. 
+    Because the protocol lacks advanced filesystem interaction its capabilities can be limited compared to newer systems.
+  </p>
+
+  <p>
+    When the client is finished it sends a command to terminate the session. 
+    The server closes the secure channel and finalizes any pending operations. 
+    If the connection drops unexpectedly in the middle of a file transfer the server may leave incomplete temporary files.
+  </p>
+
+  <p>
+    Modern SFTP implementations based on SSH are significantly more secure and feature rich so port 115 SFTP is largely considered legacy and deprecated. 
+    Its usage is uncommon outside older embedded systems or outdated enterprise environments.
+  </p>
+</section>
+      
+      <section class="protocol-page-security">
+        <h3>Security Considerations</h3>
+        <p>
+          While SFTP on port 115 provides encryption it does not follow a unified security standard which makes its actual security level unpredictable. 
+          Weak cipher implementations and outdated libraries may expose data to decryption attempts. 
+          The protocol is also vulnerable to downgrade attacks if poorly configured. 
+          Lack of modern authentication methods further reduces its security in contemporary environments.
+        </p>
+      </section>
+      
+      <section class="protocol-page-abuse">
+        <h3>Potential Abuse Cases</h3>
+        <p>
+          Attackers may exploit weak authentication to gain unauthorized access to file systems. 
+          Misconfigured servers can expose sensitive data through insecure encryption. 
+          Legacy systems running port 115 SFTP may be targeted for lateral movement or data exfiltration. 
+          Because the protocol is outdated some security appliances may overlook malicious traffic disguised as SFTP.
+        </p>
+      </section>
+      
+      <section class="protocol-page-detection">
+        <h3>Detection Strategies</h3>
+        <p>
+          Network scanning can reveal port 115 listeners which may indicate outdated or forgotten systems. 
+          Monitoring file transfer activity helps identify unusual downloads or uploads. 
+          Intrusion detection tools can flag legacy encryption or suspicious authentication attempts. 
+          Reviewing server logs may expose brute force attempts or unauthorized file operations.
+        </p>
+      </section>
+      
+      <section class="protocol-page-mitigation">
+        <h3>Mitigation Techniques</h3>
+        <p>
+          Disabling port 115 SFTP entirely is recommended unless absolutely required for legacy compatibility. 
+          Migrating to SSH based SFTP or FTPS provides modern secure file transfer standards. 
+          Enforcing strong authentication and restricting access through firewalls reduces attack exposure. 
+          Regular audits can identify outdated systems using this deprecated protocol.
+        </p>
+      </section>
+
+      <section class="protocol-page-references">
+        <h3>References</h3>
+        <ul>
+          <li><a href="https://www.rfc-editor.org/" target="_blank">RFC Archives (no official SFTP port 115 RFC)</a></li>
+          <li><a href="https://datatracker.ietf.org/doc/html/draft-ietf-secsh-filexfer" target="_blank">IETF Draft SSH File Transfer Protocol</a></li>
+        </ul>
+      </section>
+    </div>
+  </main>
+  
+  <footer>
+    <div class="footer-content">
+      <p>ProtoBas © 2025 - A curated collection of network protocols for cybersecurity professionals</p>
+      <p>Contact: <a href="mailto:SubutayUlgen@protonmail.com">SubutayUlgen@protonmail.com</a></p>
+      <p><a href="https://github.com/Subutay-cybersecurity/ProtoBas" target="_blank">GitHub Repository</a></p>
+    </div>
+  </footer>
+
+  <script src="../Main-page/Script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme) {
+        document.documentElement.setAttribute("data-theme", savedTheme);
+      }
+    });
+  </script>
+</body>
+</html>

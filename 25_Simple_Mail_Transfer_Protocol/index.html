@@ -3,72 +3,180 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simple Mail Transfer Protocol (SMTP) - ProtoBas</title>
+  <title>SMTP - ProtoBas</title>
   <link rel="stylesheet" href="../Style.css">
 </head>
-<body>
+<body class="light-theme">
   <main>
     <nav>
       <a href="../index.html"><h2>ProtoBas</h2></a>
       <span id="star-count">⭐ Loading...</span>
     </nav>
     
-    <div class="protocol-detail">
-      <header class="protocol-header">
-        <h1 class="protocol-name">Simple Mail Transfer Protocol (SMTP)</h1>
-        <div class="protocol-meta">
-          <div class="protocol-port"><strong>Port:</strong> <span class="port-number">25, 587, 465</span></div>
-          <div class="protocol-type"><strong>Type:</strong> <span class="protocol-type-value">Application Layer</span></div>
+    <div class="protocol-detail-page">
+      <header class="protocol-page-header">
+        <h1 class="protocol-page-name">SMTP (Simple Mail Transfer Protocol)</h1>
+        <div class="protocol-page-meta">
+          <div class="protocol-page-port"><strong>Port:</strong> <span class="port-page-number">25, 465, 587</span></div>
+          <div class="protocol-page-type"><strong>Type:</strong> <span class="protocol-page-type-value">Email Delivery</span></div>
         </div>
       </header>
       
-      <section class="protocol-description">
+      <section class="protocol-page-description">
         <h3>Description</h3>
-        <p>SMTP (Simple Mail Transfer Protocol) is a TCP/IP protocol used for sending email messages between servers and from email clients to mail servers. It is the standard protocol for email transmission across the internet.</p>
+        <p>
+          SMTP is the core protocol responsible for sending emails across the internet. 
+          It operates as a push-based protocol meaning that email servers actively send messages to the next server in the delivery chain. 
+          SMTP was originally designed without encryption or authentication and because of this early versions were vulnerable to spoofing and interception. 
+          Modern implementations solve these problems through security extensions and encrypted communication channels. 
+          Despite alternative mail protocols existing SMTP remains the backbone of email transmission worldwide.
+        </p>
       </section>
       
-      <section class="protocol-technical">
+      <section class="protocol-page-technical">
         <h3>Technical Details</h3>
         <ul>
-          <li>Uses TCP port 25 for traditional SMTP communication</li>
-          <li>Uses ports 587 (submission) and 465 (SMTPS) for secure email submission</li>
-          <li>Follows request-response model with 3-digit reply codes</li>
-          <li>Standard commands include HELO/EHLO, MAIL FROM, RCPT TO, DATA, QUIT</li>
+          <li>Uses port 25 for server to server communication.</li>
+          <li>Uses port 465 for SMTP over SSL and port 587 for SMTP with STARTTLS.</li>
+          <li>Operates through text based commands such as HELO MAIL FROM RCPT TO and DATA.</li>
+          <li>Uses a store and forward mechanism for message transfer.</li>
+          <li>Supports authentication mechanisms through SMTP AUTH extensions.</li>
         </ul>
       </section>
       
-      <section class="protocol-security">
+<section class="protocol-page-how-to-work">
+  <h3>How To Work</h3>
+
+  <p>
+    SMTP begins working when an email client or service prepares a message for delivery. 
+    The client connects to an SMTP server on port 25 or one of the secure alternatives like 465 or 587. 
+    This connection establishes the initial communication channel through which all commands and responses will be exchanged.
+  </p>
+
+  <p>
+    Once the connection is established the client starts by sending either a HELO or EHLO command. 
+    HELO is the older version while EHLO supports additional features such as authentication and encryption upgrades. 
+    The server replies with a greeting message and a numeric status code that indicates whether the communication can proceed.
+  </p>
+
+  <p>
+    After the greeting phase the client may need to authenticate depending on server configuration. 
+    Authentication is performed through mechanisms like LOGIN PLAIN or more secure options such as CRAM MD5. 
+    If STARTTLS is supported the client can upgrade the plain text connection to an encrypted one before sending sensitive credentials.
+  </p>
+
+  <p>
+    Once authentication is complete the client specifies the sender address using the MAIL FROM command. 
+    The server validates this address and responds with a status code. 
+    If the address is acceptable the client then issues one or more RCPT TO commands to list the intended recipients. 
+    The server checks each address and confirms whether delivery is allowed.
+  </p>
+
+  <p>
+    When the server accepts at least one recipient the client sends a DATA command. 
+    This signals the transition from command mode to data mode. 
+    The server replies with a prompt indicating it is ready to receive the message body. 
+    The client then transmits the email header fields and text content ending the data section with a single period on its own line.
+  </p>
+
+  <p>
+    Upon receiving the complete message the SMTP server attempts to deliver it. 
+    If the recipient belongs to the same server the message is stored locally. 
+    If the recipient is external the server queries DNS for MX records to determine which server is responsible for the target domain. 
+    The message is then forwarded using another SMTP session.
+  </p>
+
+  <p>
+    If delivery to the next server fails SMTP uses a queue based retry mechanism. 
+    Emails may be deferred temporarily if the destination server is unavailable. 
+    Automatic retry attempts continue for a predetermined period often up to several days before the message is considered undeliverable.
+  </p>
+
+  <p>
+    Throughout the entire process both the client and server exchange status codes that describe the current state. 
+    These codes help identify issues such as authentication failures mailbox unavailability or server side errors. 
+    Administrators rely heavily on these codes when diagnosing email delivery problems.
+  </p>
+
+  <p>
+    Once all message transfers are complete the client sends a QUIT command. 
+    This instructs the server to close the session gracefully. 
+    The server responds with a final acknowledgement and terminates the connection.
+  </p>
+
+  <p>
+    Logs play a crucial part in SMTP operations. 
+    Every step including authentication attempts message transfers errors and recipient responses is recorded. 
+    These logs are invaluable for security monitoring performance analysis and troubleshooting complex delivery issues.
+  </p>
+</section>
+      
+      <section class="protocol-page-security">
         <h3>Security Considerations</h3>
-        <p>Traditional SMTP transmits data in plaintext. Modern implementations use STARTTLS or SMTPS for encryption. Open relays can be exploited for spam distribution.</p>
+        <p>
+          SMTP by itself provides no encryption and supports spoofable sender addresses. 
+          Attackers can intercept messages or impersonate legitimate users. 
+          This is why modern servers enforce TLS authentication and anti spoofing technologies such as SPF DKIM and DMARC. 
+          These protections reduce spam and prevent unauthorized senders from forging email identities.
+        </p>
       </section>
       
-      <section class="protocol-abuse">
+      <section class="protocol-page-abuse">
         <h3>Potential Abuse Cases</h3>
-        <p>SMTP can be exploited for spam distribution, phishing attacks, and email-based malware delivery. Open relays can be abused to send large volumes of unsolicited emails.</p>
+        <p>
+          Open SMTP relays can be hijacked to distribute massive amounts of spam. 
+          Weak authentication can allow attackers to send phishing emails from legitimate domains. 
+          Compromised servers can be used to forward malicious attachments or participate in botnet controlled campaigns. 
+          Misconfigured DNS records can also be exploited to bypass verification mechanisms.
+        </p>
       </section>
       
-      <section class="protocol-detection">
+      <section class="protocol-page-detection">
         <h3>Detection Strategies</h3>
-        <p>Monitor for unusual email volumes, connections to known malicious email servers, and suspicious email patterns. SPF, DKIM, and DMARC records can help verify legitimate senders.</p>
+        <p>
+          Monitoring failed login attempts and unusual sender patterns is critical for detection. 
+          Large volumes of outgoing emails may indicate spam activity. 
+          Log analysis tools can detect spoofing attempts or unauthorized relay usage. 
+          IDS and mail security gateways can inspect SMTP traffic for suspicious attachments and command patterns.
+        </p>
       </section>
       
-      <section class="protocol-mitigation">
+      <section class="protocol-page-mitigation">
         <h3>Mitigation Techniques</h3>
-        <p>Implement authentication mechanisms, use secure SMTP (STARTTLS/SMTPS), configure proper SPF/DKIM/DMARC records, and limit relay access to authorized users only.</p>
+        <p>
+          Enforcing TLS and strong authentication is essential. 
+          Administrators should disable open relays and restrict which IP addresses can send mail through the server. 
+          SPF DKIM and DMARC must be configured to protect domain identity. 
+          Rate limiting and content filtering can reduce abuse and block suspicious emails before delivery.
+        </p>
       </section>
+
       
-      <section class="protocol-references">
+      <section class="protocol-page-references">
         <h3>References</h3>
         <ul>
-          <li><a href="https://tools.ietf.org/html/rfc5321">RFC 5321 - Simple Mail Transfer Protocol</a></li>
-          <li><a href="https://tools.ietf.org/html/rfc3207">RFC 3207 - SMTP Service Extension for Secure SMTP over Transport Layer Security</a></li>
+          <li><a href="https://www.rfc-editor.org/rfc/rfc5321" target="_blank">RFC 5321 Simple Mail Transfer Protocol</a></li>
+          <li><a href="https://www.rfc-editor.org/rfc/rfc4954" target="_blank">SMTP Authentication</a></li>
         </ul>
       </section>
     </div>
   </main>
   
+  <footer>
+    <div class="footer-content">
+      <p>ProtoBas © 2025 - A curated collection of network protocols for cybersecurity professionals</p>
+      <p>Contact: <a href="mailto:SubutayUlgen@protonmail.com">SubutayUlgen@protonmail.com</a></p>
+      <p><a href="https://github.com/Subutay-cybersecurity/ProtoBas" target="_blank">GitHub Repository</a></p>
+    </div>
+  </footer>
   <script src="../Main-page/Script.js"></script>
-  <script src="script.js"></script>
-  <script>document.addEventListener("DOMContentLoaded", function() { const savedTheme = localStorage.getItem("theme"); if (savedTheme) { document.documentElement.setAttribute("data-theme", savedTheme); } });</script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme) {
+        document.documentElement.setAttribute("data-theme", savedTheme);
+      }
+    });
+  </script>
 </body>
 </html>

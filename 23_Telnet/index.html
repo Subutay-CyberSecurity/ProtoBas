@@ -3,72 +3,170 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Telnet - ProtoBas</title>
+  <title>TELNET - ProtoBas</title>
   <link rel="stylesheet" href="../Style.css">
 </head>
-<body>
+<body class="light-theme">
   <main>
     <nav>
       <a href="../index.html"><h2>ProtoBas</h2></a>
       <span id="star-count">⭐ Loading...</span>
     </nav>
     
-    <div class="protocol-detail">
-      <header class="protocol-header">
-        <h1 class="protocol-name">Telnet</h1>
-        <div class="protocol-meta">
-          <div class="protocol-port"><strong>Port:</strong> <span class="port-number">23</span></div>
-          <div class="protocol-type"><strong>Type:</strong> <span class="protocol-type-value">Application Layer</span></div>
+    <div class="protocol-detail-page">
+      <header class="protocol-page-header">
+        <h1 class="protocol-page-name">TELNET (Teletype Network Protocol)</h1>
+        <div class="protocol-page-meta">
+          <div class="protocol-page-port"><strong>Port:</strong> <span class="port-page-number">23</span></div>
+          <div class="protocol-page-type"><strong>Type:</strong> <span class="protocol-page-type-value">Remote Access</span></div>
         </div>
       </header>
       
-      <section class="protocol-description">
+      <section class="protocol-page-description">
         <h3>Description</h3>
-        <p>Telnet is an application protocol used on the Internet or local area networks to provide a command-line interface for communicating with remote devices or servers. It provides a command-line interface for connecting to network devices for configuration and troubleshooting purposes as well as testing and verifying network connectivity.</p>
+        <p>
+          Telnet is one of the earliest protocols used for remote terminal communication. 
+          It allows a user to interact with a remote system as if they were sitting directly in front of it. 
+          Developed before modern encryption standards Telnet sends all data in plain text including login credentials and commands. 
+          While largely replaced by secure alternatives such as SSH it still appears in legacy systems embedded devices old network hardware and educational environments.
+        </p>
       </section>
       
-      <section class="protocol-technical">
+      <section class="protocol-page-technical">
         <h3>Technical Details</h3>
         <ul>
-          <li>Uses TCP port 23 by default</li>
-          <li>Provides remote terminal access to network devices</li>
-          <li>Uses NVT (Network Virtual Terminal) for data representation</li>
-          <li>Supports various options negotiated through Telnet protocol</li>
+          <li>Uses TCP port 23 for command and data transmission.</li>
+          <li>Transmits all information including authentication in plain text.</li>
+          <li>Implements a simple command based terminal communication model.</li>
+          <li>Supports basic option negotiation through Telnet control codes.</li>
+          <li>Provides direct shell access to the remote system once authenticated.</li>
         </ul>
       </section>
-      
-      <section class="protocol-security">
+
+      <section class="protocol-page-how-to-work">
+        <h3>How To Work</h3>
+
+        <p>
+          Telnet works by establishing a single TCP connection from the client to the server on port 23. 
+          This connection carries both commands and responses in a continuous bidirectional stream. 
+          Because Telnet was created for interactive terminal sessions the protocol focuses on real time character based communication.
+        </p>
+
+        <p>
+          When the client connects the server responds with an initial message indicating that the Telnet service is available. 
+          This may include a login prompt or system banner depending on how the Telnet server is configured. 
+          At this stage the connection is fully open and ready for command exchange.
+        </p>
+
+        <p>
+          Telnet uses special control codes to negotiate capabilities between client and server. 
+          This negotiation determines features such as echo behavior terminal type or character mode. 
+          Although basic these option codes allow Telnet to support different terminal environments and user preferences.
+        </p>
+
+        <p>
+          After negotiation the server presents the login prompt. 
+          The user enters a username and password which are sent across the network without encryption. 
+          Any device capable of capturing traffic can read the credentials making Telnet unsuitable for untrusted networks.
+        </p>
+
+        <p>
+          Once authenticated the client gains direct terminal access to the remote system. 
+          Every keystroke the user enters is transmitted instantly to the server. 
+          Likewise every response the server generates is immediately echoed back to the client.
+        </p>
+
+        <p>
+          Telnet sessions operate in character mode meaning each character is processed as soon as it is typed. 
+          This design was intended to simulate a physical terminal and provide fast interactive control for system administration or application operation.
+        </p>
+
+        <p>
+          Telnet does not separate control and data channels. 
+          Everything flows through the same TCP stream which keeps the protocol simple but limits flexibility compared to later technologies. 
+          The server interprets specific sequences as control codes and treats all other input as normal characters.
+        </p>
+
+        <p>
+          During a session users can execute system commands manage files modify configurations or control applications depending on their access level. 
+          Telnet essentially grants full shell interaction which means its security entirely depends on the underlying system permissions.
+        </p>
+
+        <p>
+          When the user finishes the session they usually type exit or logout. 
+          The server then closes the connection and frees system resources. 
+          If the connection is terminated unexpectedly the server may log the event or automatically end the associated session.
+        </p>
+
+        <p>
+          Telnet servers commonly generate logs that include connection times credentials login attempts executed commands and error messages. 
+          These logs can be useful for auditing but also highlight how risky Telnet is since everything transmitted can be seen by attackers monitoring the network.
+        </p>
+      </section>
+
+      <section class="protocol-page-security">
         <h3>Security Considerations</h3>
-        <p>Telnet transmits data including usernames and passwords in plaintext, making it vulnerable to eavesdropping. It's recommended to use SSH instead for secure remote access as it encrypts all communications.</p>
+        <p>
+          Telnet is considered highly insecure because all traffic is unencrypted. 
+          Attackers can easily sniff credentials and commands using simple packet capture tools. 
+          It is extremely vulnerable to man in the middle attacks session hijacking and credential theft. 
+          The protocol also lacks modern authentication mechanisms and integrity checks.
+        </p>
       </section>
       
-      <section class="protocol-abuse">
+      <section class="protocol-page-abuse">
         <h3>Potential Abuse Cases</h3>
-        <p>Telnet can be used for unauthorized access attempts to network devices. It's also commonly used in IoT devices but often poorly secured, making these devices vulnerable to attacks.</p>
+        <p>
+          Attackers frequently attempt brute force attacks on exposed Telnet servers. 
+          Many embedded devices like routers and IoT systems ship with default Telnet credentials making them easy targets. 
+          Compromised Telnet services can provide full shell access which enables lateral movement data theft botnet creation or system modification.
+        </p>
       </section>
       
-      <section class="protocol-detection">
+      <section class="protocol-page-detection">
         <h3>Detection Strategies</h3>
-        <p>Monitor for Telnet traffic on port 23, especially from external sources. Track failed authentication attempts and unusual connection patterns to Telnet-enabled devices.</p>
+        <p>
+          Detection involves monitoring for repeated login failures unusual connection sources or unexpected Telnet activity on port 23. 
+          Packet inspection tools can easily identify Telnet traffic because everything is plain text. 
+          Behavioral analytics can detect sudden command execution patterns or non administrative use of Telnet.
+        </p>
       </section>
       
-      <section class="protocol-mitigation">
+      <section class="protocol-page-mitigation">
         <h3>Mitigation Techniques</h3>
-        <p>Disable Telnet if not absolutely necessary, use SSH as a secure alternative, implement access controls limiting which IP addresses can connect via Telnet, and ensure network segregation for critical devices.</p>
+        <p>
+          The best mitigation is disabling Telnet entirely and migrating to SSH. 
+          If disabling is not possible administrators should enforce strong credentials restrict access by IP and use network segmentation. 
+          Additional controls include monitoring logs regularly disabling default accounts and enforcing firewall rules that block unnecessary Telnet access.
+        </p>
       </section>
-      
-      <section class="protocol-references">
+
+      <section class="protocol-page-references">
         <h3>References</h3>
         <ul>
-          <li><a href="https://tools.ietf.org/html/rfc854">RFC 854 - Telnet Protocol Specification</a></li>
-          <li><a href="https://tools.ietf.org/html/rfc855">RFC 855 - Telnet Option Specifications</a></li>
+          <li><a href="https://www.rfc-editor.org/rfc/rfc854" target="_blank">RFC 854 Telnet Protocol Specification</a></li>
+          <li><a href="https://www.rfc-editor.org/rfc/rfc855" target="_blank">RFC 855 Telnet Option Specifications</a></li>
         </ul>
       </section>
     </div>
   </main>
   
+  <footer>
+    <div class="footer-content">
+      <p>ProtoBas © 2025 - A curated collection of network protocols for cybersecurity professionals</p>
+      <p>Contact: <a href="mailto:SubutayUlgen@protonmail.com">SubutayUlgen@protonmail.com</a></p>
+      <p><a href="https://github.com/Subutay-cybersecurity/ProtoBas" target="_blank">GitHub Repository</a></p>
+    </div>
+  </footer>
+
   <script src="../Main-page/Script.js"></script>
-  <script src="script.js"></script>
-  <script>document.addEventListener("DOMContentLoaded", function() { const savedTheme = localStorage.getItem("theme"); if (savedTheme) { document.documentElement.setAttribute("data-theme", savedTheme); } });</script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme) {
+        document.documentElement.setAttribute("data-theme", savedTheme);
+      }
+    });
+  </script>
 </body>
 </html>

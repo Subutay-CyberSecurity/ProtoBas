@@ -432,3 +432,119 @@ footer {
 }
 
 
+/* Protocol Detail Page Specific Styles */
+.protocol-detail-page {
+  margin: 0 48px 40px;
+  padding-top: 30px;
+  color: var(--text-secondary);
+}
+
+.protocol-page-header {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.protocol-page-name {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  color: var(--text-primary);
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.protocol-page-meta {
+  display: flex;
+  gap: 30px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.protocol-page-port, .protocol-page-type {
+  font-size: 1.1rem;
+  padding: 8px 16px;
+  background-color: var(--hover-bg);
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.protocol-page-port strong, .protocol-page-type strong {
+  color: var(--text-primary);
+  margin-right: 8px;
+}
+
+.port-page-number, .protocol-page-type-value {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.protocol-detail-page section {
+  margin-bottom: 40px;
+  padding: 20px;
+  background-color: var(--hover-bg);
+  border-radius: var(--border-radius);
+  border-left: 4px solid var(--primary-color);
+}
+
+.protocol-detail-page h3 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: var(--text-primary);
+  font-weight: 700;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.protocol-detail-page ul {
+  margin-left: 20px;
+  margin-bottom: 15px;
+}
+
+.protocol-detail-page li {
+  margin-bottom: 10px;
+  position: relative;
+  padding-left: 20px;
+}
+
+.protocol-detail-page li::before {
+  content: '•';
+  color: var(--primary-color);
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+}
+
+.protocol-detail-page p {
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 15px;
+}
+
+.protocol-page-references a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.protocol-page-references a:hover {
+  text-decoration: underline;
+}
+
+.port-page-number , .protocol-page-type-value , .protocol-page-references ul li a, nav a h2{
+  color:white;
+}
+
+nav a{
+  text-decoration: none;
+}
+
+nav a:hover{
+  text-decoration: underline;
+  text-decoration-color: white;
+  margin-bottom: 10px;
+}

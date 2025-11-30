@@ -1,1 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IMAP - ProtoBas</title>
+  <link rel="stylesheet" href="../Style.css">
+</head>
+<body class="light-theme">
+  <main>
+    <nav>
+      <a href="../index.html"><h2>ProtoBas</h2></a>
+      <span id="star-count">⭐ Loading...</span>
+    </nav>
+    
+    <div class="protocol-detail-page">
+      <header class="protocol-page-header">
+        <h1 class="protocol-page-name">IMAP (Internet Message Access Protocol)</h1>
+        <div class="protocol-page-meta">
+          <div class="protocol-page-port"><strong>Port:</strong> <span class="port-page-number">143</span></div>
+          <div class="protocol-page-type"><strong>Type:</strong> <span class="protocol-page-type-value">Email Management</span></div>
+        </div>
+      </header>
+      
+      <section class="protocol-page-description">
+        <h3>Description</h3>
+        <p>
+          IMAP is an advanced email access protocol that allows users to view and manage messages stored on a remote mail server. 
+          Unlike POP3 which downloads messages for offline storage IMAP keeps messages on the server and synchronizes changes across multiple devices. 
+          This makes IMAP ideal for modern email usage where users frequently switch between phones laptops and web clients. 
+          IMAP provides folder support message state tracking and selective message retrieval which makes it more flexible than POP3. 
+          It is widely used by email service providers due to its synchronization and organizational capabilities.
+        </p>
+      </section>
+      
+      <section class="protocol-page-technical">
+        <h3>Technical Details</h3>
+        <ul>
+          <li>Uses TCP port 143 for standard connections and TCP port 993 for IMAPS secured with TLS.</li>
+          <li>Supports full mailbox synchronization including folder hierarchy flags and message metadata.</li>
+          <li>Allows partial message retrieval enabling efficient bandwidth usage on large emails.</li>
+          <li>Operates with a tag based command response structure allowing multiple outstanding requests.</li>
+          <li>Supports message flags such as Seen Deleted Answered Flagged Draft and Recent.</li>
+        </ul>
+      </section>
 
+<section class="protocol-page-how-to-work">
+  <h3>How To Work</h3>
+
+  <p>
+    The IMAP process begins when an email client connects to the mail server on port 143. 
+    The server responds with a greeting message indicating that it is ready for commands. 
+    Before accessing mailbox contents the client must authenticate with valid credentials.
+  </p>
+
+  <p>
+    Authentication typically uses the LOGIN command where the client sends a username and password. 
+    If authentication succeeds the server grants access to the user's mailbox and transitions to an authenticated state. 
+    Secure environments may use encrypted authentication mechanisms or TLS wrapping.
+  </p>
+
+  <p>
+    Once authenticated the client issues a SELECT or EXAMINE command to choose a mailbox such as INBOX. 
+    The server responds with details about the selected mailbox including message count available flags and UID validity information.
+  </p>
+
+  <p>
+    After selecting a mailbox the client can fetch message metadata using the FETCH command. 
+    The server returns information such as headers flags and message structure. 
+    This allows clients to display email lists quickly without downloading full message bodies.
+  </p>
+
+  <p>
+    When a user views a message the client retrieves the message body using another FETCH request. 
+    IMAP supports partial body retrieval which is useful for large messages because clients can download only the needed sections.
+  </p>
+
+  <p>
+    IMAP continuously synchronizes message states. 
+    When a user reads a message the client updates the Seen flag using the STORE command. 
+    These changes are reflected on all connected devices allowing seamless email management.
+  </p>
+
+  <p>
+    Users can organize their mailbox using CREATE DELETE RENAME or COPY commands. 
+    These allow the creation or removal of folders as well as copying messages to other folders. 
+    IMAP maintains a structured folder hierarchy which helps users manage large volumes of email.
+  </p>
+
+  <p>
+    Deleting a message in IMAP does not immediately remove it. 
+    Instead the client marks the message with the Deleted flag. 
+    Messages are permanently removed only after the client issues the EXPUNGE command.
+  </p>
+
+  <p>
+    IMAP supports idle mode or push style notifications. 
+    When the client enters IDLE state the server sends immediate updates whenever new mail arrives. 
+    This makes IMAP more responsive compared to periodic polling.
+  </p>
+
+  <p>
+    When the client finishes all tasks it closes the mailbox using the CLOSE command and ends the session with LOGOUT. 
+    The server then releases all associated session resources and terminates the TCP connection safely.
+  </p>
+</section>
+      
+      <section class="protocol-page-security">
+        <h3>Security Considerations</h3>
+        <p>
+          IMAP without encryption exposes credentials and message data to interception. 
+          Attackers may capture logins or read emails if traffic is not protected. 
+          Brute force attempts against IMAP accounts are common due to predictable username patterns. 
+          Misconfigured servers may allow weak authentication or plaintext sessions. 
+          Using IMAPS on port 993 and enforcing strong authentication significantly improves security.
+        </p>
+      </section>
+      
+      <section class="protocol-page-abuse">
+        <h3>Potential Abuse Cases</h3>
+        <p>
+          Attackers may compromise IMAP accounts to monitor email communications. 
+          IMAP can be abused for data exfiltration by embedding sensitive information inside outgoing or draft messages. 
+          Compromised accounts may be used for spam campaigns. 
+          Unauthorized folder manipulation or message deletion can disrupt user operations and hide attacker activity.
+        </p>
+      </section>
+      
+      <section class="protocol-page-detection">
+        <h3>Detection Strategies</h3>
+        <p>
+          Unusual login patterns or repeated authentication failures may indicate brute force attempts. 
+          Monitoring for IMAP connections from unfamiliar regions or devices helps detect compromised accounts. 
+          Log analysis can reveal unauthorized message deletions or suspicious folder operations. 
+          Detection rules may also flag excessive IMAP activity such as continuous synchronization typical of automated scripts.
+        </p>
+      </section>
+      
+      <section class="protocol-page-mitigation">
+        <h3>Mitigation Techniques</h3>
+        <p>
+          Enforcing TLS encryption protects credentials and message content from interception. 
+          Rate limiting and multi factor authentication reduce the success of brute force attacks. 
+          Administrators should disable plaintext logins and enforce modern authentication mechanisms. 
+          Regular monitoring of account activity and anomaly detection helps identify compromises. 
+          Strong password policies and device access restrictions further strengthen IMAP security.
+        </p>
+      </section>
+
+      <section class="protocol-page-references">
+        <h3>References</h3>
+        <ul>
+          <li><a href="https://www.rfc-editor.org/rfc/rfc3501" target="_blank">RFC 3501 Internet Message Access Protocol Version 4rev1</a></li>
+          <li><a href="https://www.rfc-editor.org/rfc/rfc9051" target="_blank">RFC 9051 IMAP Version 4rev2</a></li>
+        </ul>
+      </section>
+    </div>
+  </main>
+  
+  <footer>
+    <div class="footer-content">
+      <p>ProtoBas © 2025 - A curated collection of network protocols for cybersecurity professionals</p>
+      <p>Contact: <a href="mailto:SubutayUlgen@protonmail.com">SubutayUlgen@protonmail.com</a></p>
+      <p><a href="https://github.com/Subutay-cybersecurity/ProtoBas" target="_blank">GitHub Repository</a></p>
+    </div>
+  </footer>
+
+  <script src="../Main-page/Script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme) {
+        document.documentElement.setAttribute("data-theme", savedTheme);
+      }
+    });
+  </script>
+</body>
+</html>

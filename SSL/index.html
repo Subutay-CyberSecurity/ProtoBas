@@ -3,72 +3,178 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Secure Sockets Layer (SSL) - ProtoBas</title>
+  <title>SSL - ProtoBas</title>
   <link rel="stylesheet" href="../Style.css">
 </head>
-<body>
+<body class="light-theme">
   <main>
     <nav>
       <a href="../index.html"><h2>ProtoBas</h2></a>
       <span id="star-count">⭐ Loading...</span>
     </nav>
-    
-    <div class="protocol-detail">
-      <header class="protocol-header">
-        <h1 class="protocol-name">Secure Sockets Layer (SSL)</h1>
-        <div class="protocol-meta">
-          <div class="protocol-port"><strong>Port:</strong> <span class="port-number">N/A (Layer below application)</span></div>
-          <div class="protocol-type"><strong>Type:</strong> <span class="protocol-type-value">Transport Layer</span></div>
+
+    <div class="protocol-detail-page">
+      <header class="protocol-page-header">
+        <h1 class="protocol-page-name">Secure Sockets Layer (SSL)</h1>
+        <div class="protocol-page-meta">
+          <div class="protocol-page-port"><strong>Port:</strong> <span class="port-page-number">Variable</span></div>
+          <div class="protocol-page-type"><strong>Type:</strong> <span class="protocol-page-type-value"></span></div>
         </div>
       </header>
-      
-      <section class="protocol-description">
+
+      <section class="protocol-page-description">
         <h3>Description</h3>
-        <p>SSL (Secure Sockets Layer) is a cryptographic protocol designed to provide communications security over a computer network. Though largely superseded by TLS, SSL concepts remain important for understanding secure communications.</p>
+        <p>
+          Secure Sockets Layer is a cryptographic protocol designed to secure communication between clients and servers over 
+          untrusted networks such as the internet. SSL provides confidentiality, authentication, and data integrity by using 
+          encryption and certificate based validation. Although SSL is considered deprecated and replaced by its successor TLS 
+          it remains widely referenced and forms the conceptual foundation for modern secure communication.
+        </p>
+        <p>
+          The protocol protects sensitive data such as passwords, payment information, session tokens, and personal details 
+          by ensuring that any intercepted traffic remains unreadable. SSL relies on asymmetric cryptography to establish secure 
+          session keys and symmetric encryption to encode the main data stream throughout the session.
+        </p>
       </section>
-      
-      <section class="protocol-technical">
+
+      <section class="protocol-page-technical">
         <h3>Technical Details</h3>
         <ul>
-          <li>Provides encryption, authentication, and data integrity</li>
-          <li>Uses asymmetric cryptography for key exchange and symmetric encryption for data</li>
-          <li>SSL 1.0, 2.0, and 3.0 have known security vulnerabilities</li>
-          <li>Mostly replaced by TLS (Transport Layer Security) protocol</li>
+          <li>Designed to secure data transport using cryptographic algorithms</li>
+          <li>Uses asymmetric cryptography for key exchange and symmetric cryptography for data encryption</li>
+          <li>Relies on digital certificates for server authentication</li>
+          <li>Supports multiple cipher suites that define encryption and hashing algorithms</li>
+          <li>Operates above the TCP layer and below application layer protocols such as HTTP or SMTP</li>
+          <li>Negotiates encryption settings during a handshake phase before data exchange begins</li>
+          <li>Provides message integrity through hashing algorithms and MAC verification</li>
         </ul>
       </section>
-      
-      <section class="protocol-security">
+
+      <section class="protocol-page-how-to-work">
+        <h3>How To Work</h3>
+
+        <p>
+          An SSL session begins when a client attempts to access a resource that requires secure communication. The client 
+          initiates a TCP connection and sends a ClientHello message containing its supported SSL versions, cipher suites, 
+          and compression methods. This marks the start of the negotiation process.
+        </p>
+
+        <p>
+          When the server receives the ClientHello it replies with a ServerHello message. This response includes the SSL 
+          version and cipher suite chosen by the server based on what both sides support. The server also sends its digital 
+          certificate which contains its public key and identity information.
+        </p>
+
+        <p>
+          The client validates the server certificate by checking the certificate chain, verifying the signature of the 
+          certificate authority, and ensuring domain name and expiration details are correct. If anything fails the connection 
+          is aborted to prevent man in the middle attacks.
+        </p>
+
+        <p>
+          Once the certificate is validated the client generates a pre master secret which is encrypted using the server's 
+          public key. Only the server can decrypt this secret using its private key. Both parties use this value to derive 
+          session keys that will be used for symmetric encryption during the session.
+        </p>
+
+        <p>
+          After the key exchange the client and server both send ChangeCipherSpec messages indicating that all further 
+          communication will be encrypted using the newly negotiated session keys. A Finished message which is also encrypted 
+          confirms that the handshake is complete.
+        </p>
+
+        <p>
+          At this point the secure session is fully established. All data transmitted between the client and server is 
+          encrypted using symmetric algorithms such as AES. Message Authentication Codes are applied to prevent tampering 
+          and ensure data integrity.
+        </p>
+
+        <p>
+          SSL also provides features for renegotiating session parameters without re establishing a full handshake. This 
+          allows both sides to update encryption settings while maintaining an active session and minimizing performance overhead.
+        </p>
+
+        <p>
+          For performance optimization SSL sessions can be resumed using session IDs or session tickets. Session resumption 
+          avoids repeating the heavy asymmetric cryptographic operations, reducing latency and improving scalability for 
+          high traffic servers.
+        </p>
+
+        <p>
+          If either side detects an error such as invalid MAC values or unexpected message types an alert is generated. 
+          Alerts can be either warnings or fatal errors. Fatal alerts immediately terminate the session to prevent further 
+          compromise.
+        </p>
+
+        <p>
+          When the communication ends the client sends a close notify alert. This informs the server that no more data will 
+          be sent. The server replies with its own close notify and the secure session is gracefully terminated ensuring that 
+          no data is lost or truncated.
+        </p>
+
+      </section>
+
+      <section class="protocol-page-security">
         <h3>Security Considerations</h3>
-        <p>SSL versions 1.0, 2.0, and 3.0 have known security vulnerabilities and should not be used. Modern applications should use TLS 1.2 or higher for secure communications.</p>
+        <p>
+          SSL is deprecated due to known vulnerabilities such as POODLE, BEAST, and weak cipher support. Attackers can exploit 
+          outdated SSL versions to decrypt traffic or downgrade connections. Using only modern TLS versions, disabling insecure 
+          cipher suites, and enforcing strong certificate validation is essential for secure deployments.
+        </p>
       </section>
-      
-      <section class="protocol-abuse">
+
+      <section class="protocol-page-abuse">
         <h3>Potential Abuse Cases</h3>
-        <p>SSL stripping attacks can downgrade secure connections. Older SSL implementations can be vulnerable to BEAST, POODLE, and other attacks if not properly configured.</p>
+        <p>
+          Attackers may deploy fake certificates to impersonate legitimate servers or perform man in the middle attacks on 
+          outdated SSL implementations. Misconfigured SSL settings can enable downgrade attacks or allow weak encryption that 
+          can be cracked. Encrypted traffic may also be abused to hide malicious payloads from inspection tools.
+        </p>
       </section>
-      
-      <section class="protocol-detection">
+
+      <section class="protocol-page-detection">
         <h3>Detection Strategies</h3>
-        <p>Monitor for SSL/TLS handshake failures, detect usage of deprecated SSL versions, and track certificate validation issues that may indicate security problems.</p>
+        <p>
+          Detection involves monitoring for deprecated SSL versions, scanning for weak cipher suites, and inspecting certificate 
+          validity. Network tools can detect handshake anomalies or mismatched certificate chains that indicate spoofing attempts. 
+          Behavioral monitoring can reveal malicious use of encrypted channels.
+        </p>
       </section>
-      
-      <section class="protocol-mitigation">
+
+      <section class="protocol-page-mitigation">
         <h3>Mitigation Techniques</h3>
-        <p>Disable support for older SSL versions, enforce use of TLS 1.2 or higher, implement proper certificate validation, and regularly update cryptographic libraries.</p>
+        <p>
+          Administrators should disable SSL entirely and enforce the use of TLS 1.2 or higher. Implementing certificate pinning, 
+          strong hashing algorithms, and regular certificate rotation significantly improves security. Firewalls and IDS systems 
+          should flag deprecated protocol usage.
+        </p>
       </section>
-      
-      <section class="protocol-references">
+
+      <section class="protocol-page-references">
         <h3>References</h3>
         <ul>
-          <li><a href="https://tools.ietf.org/html/rfc6101">RFC 6101 - The Secure Sockets Layer (SSL) Protocol Version 3.0</a></li>
-          <li><a href="https://tools.ietf.org/html/rfc5246">RFC 5246 - The Transport Layer Security (TLS) Protocol Version 1.2</a></li>
+          <li><a href="https://datatracker.ietf.org/doc/rfc6101/" target="_blank">SSL 3.0 RFC</a></li>
+          <li><a href="https://wiki.openssl.org/index.php/SSL_and_TLS_Protocols" target="_blank">OpenSSL SSL/TLS Overview</a></li>
         </ul>
       </section>
     </div>
   </main>
-  
+
+  <footer>
+    <div class="footer-content">
+      <p>ProtoBas © 2025 - A curated collection of network protocols for cybersecurity professionals</p>
+      <p>Contact: <a href="mailto:SubutayUlgen@protonmail.com">SubutayUlgen@protonmail.com</a></p>
+      <p><a href="https://github.com/Subutay-cybersecurity/ProtoBas" target="_blank">GitHub Repository</a></p>
+    </div>
+  </footer>
+
   <script src="../Main-page/Script.js"></script>
-  <script src="script.js"></script>
-  <script>document.addEventListener("DOMContentLoaded", function() { const savedTheme = localStorage.getItem("theme"); if (savedTheme) { document.documentElement.setAttribute("data-theme", savedTheme); } });</script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const portElement = document.querySelector(".port-page-number")
+      portElement.style.color = "var(--accent-color)"
+    })
+  </script>
+
 </body>
 </html>

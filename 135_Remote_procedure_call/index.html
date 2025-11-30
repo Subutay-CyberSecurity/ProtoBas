@@ -1,1 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RPC - ProtoBas</title>
+  <link rel="stylesheet" href="../Style.css">
+</head>
+<body class="light-theme">
+  <main>
+    <nav>
+      <a href="../index.html"><h2>ProtoBas</h2></a>
+      <span id="star-count">⭐ Loading...</span>
+    </nav>
+    
+    <div class="protocol-detail-page">
+      <header class="protocol-page-header">
+        <h1 class="protocol-page-name">RPC (Remote Procedure Call)</h1>
+        <div class="protocol-page-meta">
+          <div class="protocol-page-port"><strong>Port:</strong> <span class="port-page-number">135</span></div>
+          <div class="protocol-page-type"><strong>Type:</strong> <span class="protocol-page-type-value">Inter Process Communication</span></div>
+        </div>
+      </header>
+      
+      <section class="protocol-page-description">
+        <h3>Description</h3>
+        <p>
+          Remote Procedure Call allows a program on one machine to execute functions on another machine as if they were local. 
+          On Windows systems RPC is a core communication technology used by many services including Active Directory file sharing and system management components. 
+          Port 135 functions as the RPC Endpoint Mapper which tells clients where specific RPC services are listening. 
+          Once the endpoint is identified the actual communication may shift to dynamically assigned ports. 
+          RPC provides a flexible architecture but improper configuration can expose systems to serious security risks.
+        </p>
+      </section>
+      
+      <section class="protocol-page-technical">
+        <h3>Technical Details</h3>
+        <ul>
+          <li>Primarily uses TCP and UDP port 135 for the Endpoint Mapper service.</li>
+          <li>Actual RPC communication often occurs on dynamically assigned ports above 49152.</li>
+          <li>Used heavily by Windows services including DCOM WMI SMB and Active Directory tools.</li>
+          <li>Allows remote execution of predefined procedures using a client server model.</li>
+          <li>Can use authentication encryption and signing depending on configuration.</li>
+        </ul>
+      </section>
 
+<section class="protocol-page-how-to-work">
+  <h3>How To Work</h3>
+
+  <p>
+    RPC begins when a client needs to execute a function on a remote server. 
+    The client first contacts the RPC Endpoint Mapper on port 135. 
+    The purpose of this request is to discover the port number associated with the specific RPC service the client wants to use.
+  </p>
+
+  <p>
+    When the server receives the request it responds with the correct dynamic port number for the target service. 
+    This design allows many different RPC services to operate simultaneously without port conflicts. 
+    After receiving the port information the client opens a new connection directly to that service.
+  </p>
+
+  <p>
+    Once connected the client prepares a procedure call packet. 
+    This packet contains the function identifier arguments and metadata. 
+    The server unmarshals the packet interprets the request and executes the appropriate function.
+  </p>
+
+  <p>
+    After execution the server sends back a response packet that includes the return value or an error code. 
+    RPC hides the complexity of remote communication by making remote calls appear like regular local function calls to the client application.
+  </p>
+
+  <p>
+    RPC implementations may use authentication to verify the identity of the client. 
+    This is especially important in Windows environments where services such as WMI and Active Directory rely on secure communication.
+  </p>
+
+  <p>
+    In some configurations RPC can encrypt traffic to protect the confidentiality and integrity of transmitted data. 
+    Encryption strength depends on system policies service settings and Windows security configurations.
+  </p>
+
+  <p>
+    Many RPC services operate through DCOM which is an extension that allows object oriented remote communication. 
+    This expands RPC functionality to support complex distributed applications and enterprise network systems.
+  </p>
+
+  <p>
+    When the client completes all required remote calls it closes the session. 
+    The server then releases any resources allocated for that session including memory and temporary handles.
+  </p>
+
+  <p>
+    Because RPC relies on dynamic ports the firewall must allow these high ports or must use port mapping rules. 
+    Misconfigured firewalls often block RPC unintentionally causing remote tools and services to fail.
+  </p>
+
+  <p>
+    RPC is essential for system administration operations such as remote management registry editing event log retrieval and file service coordination. 
+    Its flexibility makes it powerful but also increases the attack surface when not properly secured.
+  </p>
+</section>
+      
+      <section class="protocol-page-security">
+        <h3>Security Considerations</h3>
+        <p>
+          RPC on port 135 is a common attack vector for scanning exploitation and lateral movement. 
+          Exposed Endpoint Mapper services reveal available RPC functionality which assists attackers in identifying vulnerabilities. 
+          RPC based worms such as the Blaster worm historically relied on port 135 attacks. 
+          Weak authentication allows unauthorized remote procedure execution. 
+          Applying firewall restrictions and enforcing secure authentication can significantly reduce risks.
+        </p>
+      </section>
+      
+      <section class="protocol-page-abuse">
+        <h3>Potential Abuse Cases</h3>
+        <p>
+          Attackers may exploit RPC vulnerabilities to gain remote code execution. 
+          RPC enumeration can reveal running services and internal network information. 
+          Compromised RPC services may be used for privilege escalation or disabling security controls. 
+          Malware can use RPC channels for command execution or remote payload delivery.
+        </p>
+      </section>
+      
+      <section class="protocol-page-detection">
+        <h3>Detection Strategies</h3>
+        <p>
+          Monitoring port 135 traffic helps detect unauthorized scanning or enumeration. 
+          Endpoint Mapper logs can reveal suspicious access attempts. 
+          Intrusion detection systems may detect malformed RPC packets or exploit signatures. 
+          Behavioral monitoring on Windows systems can reveal unusual service requests or remote execution attempts.
+        </p>
+      </section>
+      
+      <section class="protocol-page-mitigation">
+        <h3>Mitigation Techniques</h3>
+        <p>
+          Limiting exposure of port 135 through firewalls is highly recommended. 
+          Enforcing strong authentication prevents unauthorized RPC execution. 
+          Keeping Windows systems updated reduces vulnerability to RPC exploits. 
+          Disabling unnecessary RPC dependent services minimizes attack surface. 
+          Network segmentation helps reduce propagation if an RPC based attack occurs.
+        </p>
+      </section>
+
+      <section class="protocol-page-references">
+        <h3>References</h3>
+        <ul>
+          <li><a href="https://learn.microsoft.com/en-us/windows/win32/rpc/rpc-start-page" target="_blank">Microsoft RPC Documentation</a></li>
+          <li><a href="https://www.rfc-editor.org/rfc/rfc5531" target="_blank">RFC 5531 RPC Protocol Specification Version 2</a></li>
+        </ul>
+      </section>
+    </div>
+  </main>
+  
+  <footer>
+    <div class="footer-content">
+      <p>ProtoBas © 2025 - A curated collection of network protocols for cybersecurity professionals</p>
+      <p>Contact: <a href="mailto:SubutayUlgen@protonmail.com">SubutayUlgen@protonmail.com</a></p>
+      <p><a href="https://github.com/Subutay-cybersecurity/ProtoBas" target="_blank">GitHub Repository</a></p>
+    </div>
+  </footer>
+
+  <script src="../Main-page/Script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme) {
+        document.documentElement.setAttribute("data-theme", savedTheme);
+      }
+    });
+  </script>
+</body>
+</html>

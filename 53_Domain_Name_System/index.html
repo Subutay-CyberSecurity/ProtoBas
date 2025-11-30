@@ -3,72 +3,176 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Domain Name System (DNS) - ProtoBas</title>
+  <title>DNS - ProtoBas</title>
   <link rel="stylesheet" href="../Style.css">
 </head>
-<body>
+<body class="light-theme">
   <main>
     <nav>
       <a href="../index.html"><h2>ProtoBas</h2></a>
       <span id="star-count">⭐ Loading...</span>
     </nav>
     
-    <div class="protocol-detail">
-      <header class="protocol-header">
-        <h1 class="protocol-name">Domain Name System (DNS)</h1>
-        <div class="protocol-meta">
-          <div class="protocol-port"><strong>Port:</strong> <span class="port-number">53</span></div>
-          <div class="protocol-type"><strong>Type:</strong> <span class="protocol-type-value">Application Layer</span></div>
+    <div class="protocol-detail-page">
+      <header class="protocol-page-header">
+        <h1 class="protocol-page-name">DNS (Domain Name System)</h1>
+        <div class="protocol-page-meta">
+          <div class="protocol-page-port"><strong>Port:</strong> <span class="port-page-number">53</span></div>
+          <div class="protocol-page-type"><strong>Type:</strong> <span class="protocol-page-type-value">Name Resolution</span></div>
         </div>
       </header>
       
-      <section class="protocol-description">
+      <section class="protocol-page-description">
         <h3>Description</h3>
-        <p>The Domain Name System (DNS) is a hierarchical and decentralized naming system for computers, services, or other resources connected to the Internet or a private network. It translates more readily memorized domain names to the numerical IP addresses needed for locating and identifying computer services.</p>
+        <p>
+          DNS is a core internet protocol responsible for translating human readable domain names into numerical IP addresses. 
+          Without DNS users would have to remember complex numerical values instead of familiar website names. 
+          DNS operates as a distributed and hierarchical system with millions of servers cooperating to resolve domain information. 
+          Although it appears simple DNS is one of the most essential services on the internet and any disruption can affect almost every online activity.
+        </p>
       </section>
       
-      <section class="protocol-technical">
+      <section class="protocol-page-technical">
         <h3>Technical Details</h3>
         <ul>
-          <li>Uses UDP port 53 for most queries, TCP for zone transfers</li>
-          <li>Hierarchical structure with root, top-level, and second-level domains</li>
-          <li>Supports various record types (A, AAAA, MX, CNAME, TXT, etc.)</li>
-          <li>Uses recursive and iterative query resolution</li>
+          <li>Uses port 53 for both UDP and TCP communication.</li>
+          <li>UDP is used for standard queries while TCP is required for zone transfers and large responses.</li>
+          <li>Operates using a hierarchical naming structure including root TLD and authoritative servers.</li>
+          <li>Supports multiple record types such as A AAAA MX CNAME NS SOA and TXT.</li>
+          <li>Uses caching to reduce latency and prevent excessive upstream queries.</li>
         </ul>
       </section>
       
-      <section class="protocol-security">
+<section class="protocol-page-how-to-work">
+  <h3>How To Work</h3>
+
+  <p>
+    DNS begins working when a device needs to translate a domain name into an IP address. 
+    The request is first sent to a resolver which is often provided by the user's ISP or a public DNS service. 
+    The resolver is responsible for handling the entire resolution process on behalf of the client.
+  </p>
+
+  <p>
+    The resolver first checks its local cache. 
+    If a valid cached entry exists and has not expired the resolver immediately returns the stored result. 
+    Caching dramatically improves performance and reduces unnecessary traffic on the global DNS infrastructure.
+  </p>
+
+  <p>
+    If the request is not found in cache the resolver sends a query to a root DNS server. 
+    Root servers do not know exact IP addresses of domains but they know which top level domain servers should be contacted next. 
+    The root server responds with the address of the TLD server responsible for domains with the corresponding extension.
+  </p>
+
+  <p>
+    The resolver then queries the TLD server. 
+    TLD servers manage domain extensions such as .com .net .org and country specific domains. 
+    They respond by providing the authoritative name servers of the requested domain.
+  </p>
+
+  <p>
+    The resolver continues by contacting the authoritative server. 
+    Authoritative servers contain the actual DNS records created by the domain owner. 
+    These records include information such as the IP address mail server or alias definitions.
+  </p>
+
+  <p>
+    When the authoritative server receives the request it searches its zone files and returns the needed record. 
+    For example if the client requested an A record the server responds with the IPv4 address associated with the domain. 
+    If multiple records exist the server may return several entries.
+  </p>
+
+  <p>
+    The resolver passes this information back to the client. 
+    Before sending it the resolver also stores the response in cache according to its TTL value. 
+    TTL determines how long the entry is allowed to remain valid and helps maintain stability across the DNS system.
+  </p>
+
+  <p>
+    Some queries require additional lookup steps. 
+    For example a CNAME record points to another domain name instead of an IP address. 
+    In such cases the resolver must perform another lookup cycle until it obtains a final numerical address.
+  </p>
+
+  <p>
+    DNS does not guarantee encrypted communication by default. 
+    Queries are sent in plain text over UDP which makes them easy to monitor or manipulate. 
+    Because of this modern implementations include DNS over HTTPS and DNS over TLS for secure and private resolution.
+  </p>
+
+  <p>
+    Zone transfers are a separate part of DNS operation. 
+    Secondary servers periodically synchronize zone data from primary servers using TCP. 
+    This redundancy ensures high availability and prevents data loss in case of server failures.
+  </p>
+</section>
+      
+      <section class="protocol-page-security">
         <h3>Security Considerations</h3>
-        <p>DNS traditionally operates without encryption or authentication, making it vulnerable to spoofing, cache poisoning, and other attacks. DNSSEC provides authentication and integrity protection.</p>
+        <p>
+          DNS is vulnerable to cache poisoning attacks where malicious responses are injected into a resolver cache. 
+          Attackers may also perform DNS spoofing to redirect users to fraudulent websites. 
+          DNS amplification attacks are commonly used in DDoS scenarios because DNS responses are larger than the requests. 
+          DNSSEC helps protect against tampering by providing cryptographic verification of DNS records.
+        </p>
       </section>
       
-      <section class="protocol-abuse">
+      <section class="protocol-page-abuse">
         <h3>Potential Abuse Cases</h3>
-        <p>DNS can be used for data exfiltration, command and control channels, and as part of DNS tunneling attacks. DNS amplification attacks can be used for DDoS.</p>
+        <p>
+          Attackers can hijack DNS traffic to direct users to phishing sites or malware hosting servers. 
+          Botnets may use DNS tunneling to bypass firewalls and exfiltrate data. 
+          Misconfigured DNS servers can act as amplifiers in large scale DDoS attacks. 
+          Public resolvers may be abused to harvest information about user queries.
+        </p>
       </section>
       
-      <section class="protocol-detection">
+      <section class="protocol-page-detection">
         <h3>Detection Strategies</h3>
-        <p>Monitor for unusual DNS query patterns, large response sizes, and queries to known malicious domains. DNS query logging can reveal suspicious activities.</p>
+        <p>
+          Unusual DNS traffic patterns such as high query volumes or repeated requests for invalid domains can indicate compromise. 
+          Tools can inspect DNS logs to identify spoofing attempts or unauthorized zone transfers. 
+          Monitoring outbound DNS requests helps detect tunneling and data exfiltration. 
+          Reputation systems can flag suspicious domains used in phishing campaigns.
+        </p>
       </section>
       
-      <section class="protocol-mitigation">
+      <section class="protocol-page-mitigation">
         <h3>Mitigation Techniques</h3>
-        <p>Implement DNS filtering, use DNSSEC for authentication, monitor DNS traffic, and consider DNS over HTTPS (DoH) or DNS over TLS (DoT) for enhanced privacy.</p>
+        <p>
+          Enabling DNSSEC provides cryptographic assurance for DNS responses. 
+          Rate limiting and response filtering can reduce the risk of amplification attacks. 
+          Restricting zone transfers to trusted IP addresses prevents unauthorized replication. 
+          Using encrypted DNS protocols helps protect privacy and prevents interception.
+        </p>
       </section>
+
       
-      <section class="protocol-references">
+      <section class="protocol-page-references">
         <h3>References</h3>
         <ul>
-          <li><a href="https://tools.ietf.org/html/rfc1034">RFC 1034 - Domain Names - Concepts and Facilities</a></li>
-          <li><a href="https://tools.ietf.org/html/rfc1035">RFC 1035 - Domain Names - Implementation and Specification</a></li>
+          <li><a href="https://www.rfc-editor.org/rfc/rfc1035" target="_blank">RFC 1035 Domain Names and DNS Implementation</a></li>
+          <li><a href="https://www.rfc-editor.org/rfc/rfc4033" target="_blank">DNS Security Extensions (DNSSEC)</a></li>
         </ul>
       </section>
     </div>
   </main>
   
+  <footer>
+    <div class="footer-content">
+      <p>ProtoBas © 2025 - A curated collection of network protocols for cybersecurity professionals</p>
+      <p>Contact: <a href="mailto:SubutayUlgen@protonmail.com">SubutayUlgen@protonmail.com</a></p>
+      <p><a href="https://github.com/Subutay-cybersecurity/ProtoBas" target="_blank">GitHub Repository</a></p>
+    </div>
+  </footer>
   <script src="../Main-page/Script.js"></script>
-  <script src="script.js"></script>
-  <script>document.addEventListener("DOMContentLoaded", function() { const savedTheme = localStorage.getItem("theme"); if (savedTheme) { document.documentElement.setAttribute("data-theme", savedTheme); } });</script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme) {
+        document.documentElement.setAttribute("data-theme", savedTheme);
+      }
+    });
+  </script>
 </body>
 </html>

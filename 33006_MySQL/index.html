@@ -1,1 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MySQL - ProtoBas</title>
+  <link rel="stylesheet" href="../Style.css">
+</head>
+<body class="light-theme">
+  <main>
+    <nav>
+      <a href="../index.html"><h2>ProtoBas</h2></a>
+      <span id="star-count">⭐ Loading...</span>
+    </nav>
 
+    <div class="protocol-detail-page">
+      <header class="protocol-page-header">
+        <h1 class="protocol-page-name">MySQL Protocol</h1>
+        <div class="protocol-page-meta">
+          <div class="protocol-page-port"><strong>Port:</strong> <span class="port-page-number">3306</span></div>
+          <div class="protocol-page-type"><strong>Type:</strong> <span class="protocol-page-type-value">Database Query Protocol</span></div>
+        </div>
+      </header>
+
+      <section class="protocol-page-description">
+        <h3>Description</h3>
+        <p>
+          The MySQL protocol is a database communication protocol used by MySQL clients and servers to 
+          exchange queries, authentication information, and result sets. It operates over TCP and functions 
+          as the main transport mechanism for SQL commands, replication, metadata exchange, and administrative 
+          operations. MySQL is widely used for web applications, enterprise systems, and cloud services due 
+          to its efficiency, reliability, and support for structured data. Although originally created by 
+          MySQL AB, it is maintained today by Oracle and an active open source community. The protocol is not 
+          encrypted by default which makes secure configurations essential in modern deployments.
+        </p>
+      </section>
+
+      <section class="protocol-page-technical">
+        <h3>Technical Details</h3>
+        <ul>
+          <li>Uses TCP port 3306 for client server communication</li>
+          <li>Employs a custom binary protocol for queries and responses</li>
+          <li>Supports authentication using SHA1 or caching SHA2 methods</li>
+          <li>Offers optional SSL or TLS encryption for secure connections</li>
+          <li>Handles SQL statements, prepared statements, metadata requests, and replication events</li>
+          <li>Operates using a packet based structure with headers identifying payload length and sequence</li>
+          <li>Works in a request response model where clients send commands and servers return result sets</li>
+        </ul>
+      </section>
+
+      <section class="protocol-page-how-to-work">
+        <h3>How To Work</h3>
+        <p>
+          The MySQL protocol begins working when a client initiates a TCP connection to port 3306 on a 
+          MySQL server. Once the connection is established the server immediately sends an initial handshake 
+          packet that includes its version, capabilities, authentication plugin information, and a random 
+          challenge string used for verifying the client.
+        </p>
+        <p>
+          Upon receiving the handshake the client responds with a login request packet. This packet contains 
+          the username, encoded password response, supported features, and optional SSL negotiation flags. 
+          If SSL is requested both sides perform a TLS handshake before continuing with authentication.
+        </p>
+        <p>
+          The server verifies the credentials by checking the client’s password hash response against its own 
+          stored hash using the selected authentication plugin. If the authentication is accepted the server 
+          sends an OK packet indicating that the session is now active. If not it returns an error packet 
+          detailing the failure reason.
+        </p>
+        <p>
+          Once the session is authenticated the client can send SQL queries using the COM_QUERY command. The 
+          server parses the SQL statement, executes it, and returns a result set packet sequence. Result sets 
+          include column definitions, row data packets, and an end of file marker.
+        </p>
+        <p>
+          For improved efficiency MySQL supports prepared statements. In this mode the client first sends a 
+          COM_STMT_PREPARE command. The server prepares the query and returns a statement ID. Clients can then 
+          execute the statement multiple times using COM_STMT_EXECUTE with different parameters.
+        </p>
+        <p>
+          The protocol also handles administrative commands such as creating users, modifying schema, flushing 
+          privileges, checking server status, and closing connections. MySQL distinguishes between regular 
+          commands and administrative commands through its binary packet identifiers.
+        </p>
+        <p>
+          When dealing with large datasets MySQL uses a streaming model. Instead of returning all rows in a 
+          single response it sends rows sequentially to avoid memory overload. Clients process each packet as 
+          it arrives allowing efficient handling of high volume data.
+        </p>
+        <p>
+          Replication in MySQL leverages the protocol to transfer binary logs from a master server to replica 
+          servers. Replicas connect through port 3306 and request binary log events which contain updates 
+          performed on the master database. This ensures consistent data synchronization across distributed 
+          systems.
+        </p>
+        <p>
+          Session management is handled through SQL commands and protocol level interactions. Clients may 
+          adjust session variables, set time zones, enable profiling, or toggle transaction settings. The 
+          protocol ensures that session state persists until the client disconnects.
+        </p>
+        <p>
+          When the client finishes its operations it sends a COM_QUIT command. The server acknowledges the 
+          command and gracefully closes the connection. If the connection is lost unexpectedly the server 
+          rolls back any uncommitted transactions to maintain data integrity.
+        </p>
+      </section>
+
+      <section class="protocol-page-security">
+        <h3>Security Considerations</h3>
+        <p>
+          MySQL communication is unencrypted by default which exposes credentials and queries to network 
+          sniffing attacks. Weak authentication plugins or outdated versions may allow brute force attacks or 
+          privilege escalation. Misconfigured permissions can expose critical tables or administrative 
+          capabilities to unauthorized users. Using TLS, strong authentication, and network isolation is 
+          essential for secure deployments.
+        </p>
+      </section>
+
+      <section class="protocol-page-abuse">
+        <h3>Potential Abuse Cases</h3>
+        <p>
+          Attackers may exploit weak passwords to gain unauthorized access. SQL injection attacks can 
+          manipulate queries executed through the protocol. Misconfigured MySQL instances exposed to the 
+          internet are often targeted for data exfiltration, ransomware payload delivery, or complete database 
+          destruction. Attackers may also use MySQL ports as covert channels for command and control traffic.
+        </p>
+      </section>
+
+      <section class="protocol-page-detection">
+        <h3>Detection Strategies</h3>
+        <p>
+          Security teams can detect misuse by monitoring authentication failures, unusual SQL queries, and 
+          unexpected replication requests. Network inspection tools can identify unencrypted MySQL traffic or 
+          suspicious external connections to port 3306. Behavioral analysis can reveal abnormal data extraction 
+          patterns or attempts to enumerate databases and tables.
+        </p>
+      </section>
+
+      <section class="protocol-page-mitigation">
+        <h3>Mitigation Techniques</h3>
+        <p>
+          Mitigation includes enforcing TLS encryption, using strong passwords, and disabling remote root 
+          access. Administrators should restrict access to port 3306 using firewalls and isolate MySQL servers 
+          from external networks. Applying security patches, enabling auditing, and using the principle of 
+          least privilege significantly reduces risks.
+        </p>
+      </section>
+
+      <section class="protocol-page-references">
+        <h3>References</h3>
+        <ul>
+          <li><a href="https://dev.mysql.com/doc/internals/en/" target="_blank">MySQL Internals Documentation</a></li>
+          <li><a href="https://dev.mysql.com/doc/refman/8.0/en/" target="_blank">MySQL Reference Manual</a></li>
+        </ul>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>ProtoBas © 2025 - A curated collection of network protocols for cybersecurity professionals</p>
+      <p>Contact: <a href="mailto:SubutayUlgen@protonmail.com">SubutayUlgen@protonmail.com</a></p>
+      <p><a href="https://github.com/Subutay-cybersecurity/ProtoBas" target="_blank">GitHub Repository</a></p>
+    </div>
+  </footer>
+
+  <script src="../Main-page/Script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const portElement = document.querySelector(".port-page-number")
+      portElement.style.color = "var(--accent-color)"
+    })
+  </script>
+
+</body>
+</html>

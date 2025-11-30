@@ -1,1 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Internet Relay Chat (IRC) - ProtoBas</title>
+  <link rel="stylesheet" href="../Style.css">
+</head>
+<body class="light-theme">
+  <main>
+    <nav>
+      <a href="../index.html"><h2>ProtoBas</h2></a>
+      <span id="star-count">⭐ Loading...</span>
+    </nav>
+    
+    <div class="protocol-detail-page">
+      <header class="protocol-page-header">
+        <h1 class="protocol-page-name">Internet Relay Chat (IRC)</h1>
+        <div class="protocol-page-meta">
+          <div class="protocol-page-port"><strong>Port:</strong> <span class="port-page-number">194</span></div>
+          <div class="protocol-page-type"><strong>Type:</strong> <span class="protocol-page-type-value">Application Layer</span></div>
+        </div>
+      </header>
+      
+      <section class="protocol-page-description">
+        <h3>Description</h3>
+        <p>
+          Internet Relay Chat is one of the earliest real-time text communication protocols designed for group discussions and direct messaging over the internet. Created in 1988 by Jarkko Oikarinen, IRC became a cornerstone of online communities and remains functional today despite the rise of modern messaging platforms. It enables users to join channels, exchange messages, perform server based commands, and interact with large distributed networks of interconnected IRC servers. Although simple in structure, IRC provides powerful features such as private messaging, nickname registration, operator privileges, and channel modes that control user behavior and access levels.
+        </p>
+      </section>
+      
+      <section class="protocol-page-technical">
+        <h3>Technical Details</h3>
+        <ul>
+          <li>Uses TCP port 194 for direct IRC communication</li>
+          <li>Operates over plain text unless SSL/TLS is added</li>
+          <li>Relies on a network of interconnected servers forming a chat network</li>
+          <li>Channel based communication model with topics and access modes</li>
+          <li>Uses commands like JOIN, PRIVMSG, NICK, MODE, PING, and WHOIS</li>
+          <li>Supports user roles such as operators, channel ops, and voiced users</li>
+          <li>Uses simple line based message structure ending with CRLF</li>
+        </ul>
+      </section>
 
+      <section class="protocol-page-how-to-work">
+        <h3>How To Work</h3>
+        <p>
+          IRC works by connecting a client to a dedicated IRC server, which then links to other servers within the same network to synchronize channels and messages. When a user connects, they identify themselves with a nickname and optionally a username and real name. The server validates this registration and either accepts the connection or requests additional information.
+        </p>
+        <p>
+          After connection is established, the client can join one or more channels. Channels are prefixed with a number sign and act as virtual chat rooms. Each channel maintains its own list of users and permissions such as operators, banned users, muted users, and invite only restrictions.
+        </p>
+        <p>
+          IRC communication uses text based commands sent from the client to the server. For example, the JOIN command allows entering a channel, while PRIVMSG is used to send messages either to channels or directly to specific users.
+        </p>
+        <p>
+          The server distributes each message to all relevant users based on channel membership and network topology. Because servers are linked, a message sent through one server is replicated across the entire network through controlled relaying mechanisms.
+        </p>
+        <p>
+          IRC also supports private messaging outside channels. These direct messages use the same PRIVMSG command but target a user's nickname instead of a channel name.
+        </p>
+        <p>
+          User presence in channels is controlled through modes. Channel operators can change modes to manage behavior, restrict access, mute users, or enable moderation. These modes help maintain order within high traffic or sensitive channels.
+        </p>
+        <p>
+          Network operators have broader administrative privileges that extend beyond individual channels. They can disconnect abusive users, configure server level settings, and maintain the health of the IRC network.
+        </p>
+        <p>
+          IRC servers regularly send PING messages to clients. Clients must respond with PONG messages to maintain the connection. Failure to respond results in timeout and disconnection.
+        </p>
+        <p>
+          Many networks implement services such as NickServ and ChanServ to provide automated nickname reservation, authentication, and channel management. These services improve security and stability in large networks.
+        </p>
+        <p>
+          Although IRC is an older protocol, it remains highly modular and extensible. New features can be added through custom server modules or bot integrations, allowing developers to build automated systems within channels.
+        </p>
+      </section>
+
+      <section class="protocol-page-security">
+        <h3>Security Considerations</h3>
+        <p>
+          IRC communication is unencrypted by default, which exposes users to eavesdropping, man in the middle attacks, and session hijacking unless TLS is enforced. Nickname spoofing, channel takeovers, and bot flooding attacks are common issues as well. Authentication mechanisms vary by network and often rely on server side services rather than built in protocol level security. Because IRC messages are plain text, sensitive data should never be transmitted without encryption. Rate limiting and protective channel modes are essential to prevent abuse.
+        </p>
+      </section>
+      
+      <section class="protocol-page-abuse">
+        <h3>Potential Abuse Cases</h3>
+        <p>
+          Attackers often use IRC for botnet command and control due to its simple message structure and real time communication model. Large scale DDoS attacks, phishing campaigns, and malware updates can be coordinated through private IRC channels. Public servers may be flooded with spam or message storms, leading to instability. IRC can also be used to distribute malicious links or host underground marketplaces on hidden networks.
+        </p>
+      </section>
+      
+      <section class="protocol-page-detection">
+        <h3>Detection Strategies</h3>
+        <p>
+          Defenders can monitor IRC traffic for unusual patterns such as repetitive PRIVMSG commands, suspicious connections to known IRC botnet servers, or large volumes of channel join and leave events. Deep packet inspection can identify IRC signatures on port 194 or non standard ports. Network logs should be analyzed for long lived connections, frequent nickname changes, or unauthorized IRC usage on corporate systems.
+        </p>
+      </section>
+      
+      <section class="protocol-page-mitigation">
+        <h3>Mitigation Techniques</h3>
+        <p>
+          Enforcing TLS encrypted IRC connections significantly reduces interception risks. Organizations should block outbound IRC traffic unless explicitly required. Rate limiting, bot filtering, nickname authentication services, and operator moderation help maintain a secure environment. For botnet related activity, isolating infected hosts and blacklisting malicious IRC servers are effective measures. Proper firewall rules and intrusion detection systems provide additional layers of protection.
+        </p>
+      </section>
+      
+      <section class="protocol-page-references">
+        <h3>References</h3>
+        <ul>
+          <li><a href="#">RFC 1459</a></li>
+          <li><a href="#">RFC 2810</a></li>
+          <li><a href="#">IRCv3 Working Group</a></li>
+        </ul>
+      </section>
+    </div>
+  </main>
+  
+  <footer>
+    <div class="footer-content">
+      <p>ProtoBas © 2025 - A curated collection of network protocols for cybersecurity professionals</p>
+      <p>Contact: <a href="mailto:SubutayUlgen@protonmail.com">SubutayUlgen@protonmail.com</a></p>
+      <p><a href="https://github.com/Subutay-cybersecurity/ProtoBas" target="_blank">GitHub Repository</a></p>
+    </div>
+  </footer>
+  <script src="../Main-page/Script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const portElement = document.querySelector(".port-page-number")
+      portElement.style.color = "var(--accent-color)"
+    })
+  </script>
+</body>
+</html>
